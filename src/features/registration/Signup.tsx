@@ -14,7 +14,7 @@ import { Envelope, Password } from "@phosphor-icons/react";
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import RegistrationHeader from "./RegistrationHeader";
 import RegistrationFooter from "./RegistrationFooter";
 
@@ -58,11 +58,11 @@ export default function SignUp() {
   });
 
   // 2. Define a submit handler.
-  // const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
-  //   values: z.infer<typeof formSchema>,
-  // ) => {
-  //   console.log(values);
-  // };
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
+    values: z.infer<typeof formSchema>,
+  ) => {
+    console.log(values);
+  };
 
   return (
     <div className="mx-auto">
@@ -73,7 +73,7 @@ export default function SignUp() {
 
       <Form {...form}>
         <form
-          // onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-2 max-sm:gap-1"
         >
           <div className="flex items-center gap-2 max-sm:gap-1">
