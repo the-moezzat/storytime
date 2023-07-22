@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../../ui/form";
 
 import { Envelope, Password } from "@phosphor-icons/react";
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
-import RegistrationHeader from "./features/registration/RegistrationHeader";
-import RegistrationFooter from "./features/registration/RegistrationFooter";
+import RegistrationHeader from "./RegistrationHeader";
+import RegistrationFooter from "./RegistrationFooter";
 
 const formSchema = z
   .object({

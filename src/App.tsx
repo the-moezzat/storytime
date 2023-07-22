@@ -2,7 +2,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Registration from "./pages/Registration";
 import Login from "./features/registration/Login";
 import { Button } from "./ui/button";
-import SignUp from "./SignUp";
+import SignUp from "./features/registration/SignUp";
 
 function App() {
   return (
