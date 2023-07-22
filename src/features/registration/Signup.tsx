@@ -15,7 +15,8 @@ import { Envelope, Password } from "@phosphor-icons/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import RegistrationHeader from "./RegistrationHeader";
+import RegistrationFooter from "./RegistrationFooter";
 
 const formSchema = z
   .object({
@@ -65,27 +66,27 @@ export default function SignUp() {
 
   return (
     <div className="mx-auto">
-      <h1 className="lg:text-5xl mb-2 scroll-m-20 text-4xl font-bold tracking-tight text-gray-900">
-        Sign up
-      </h1>
-
-      <p className="mb-8 text-lg leading-7 text-gray-500 [&:not(:first-child)]:mt-4">
-        Unlock your limitless creativity and start creating today!
-      </p>
+      <RegistrationHeader
+        title="Sign up"
+        description="Unlock your limitless creativity and start creating today!"
+      />
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className=" flex items-center gap-2">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-2 max-sm:gap-1"
+        >
+          <div className="flex items-center gap-2 max-sm:gap-1">
             <FormField
               control={form.control}
               name="firstName"
               render={({ field }) => (
-                <FormItem className=" mb-2">
+                <FormItem>
                   <FormControl>
                     <Input
                       placeholder="First name"
                       {...field}
-                      className="h-14 p-4 text-lg text-gray-700 "
+                      className="h-14 p-4 text-lg text-gray-7 "
                     />
                   </FormControl>
                   <FormMessage />
@@ -96,12 +97,12 @@ export default function SignUp() {
               control={form.control}
               name="lastName"
               render={({ field }) => (
-                <FormItem className=" mb-2">
+                <FormItem>
                   <FormControl>
                     <Input
                       placeholder="Last name"
                       {...field}
-                      className="h-14 p-4 text-lg text-gray-700 "
+                      className="h-14 p-4 text-lg text-gray-7 "
                     />
                   </FormControl>
                   <FormMessage />
@@ -113,17 +114,18 @@ export default function SignUp() {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className=" mb-2">
+              <FormItem>
                 {/* <FormLabel>Email</FormLabel> */}
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-400">
+                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-6">
                       <Envelope size={32} weight="thin" />
                     </span>
                     <Input
                       placeholder="Email"
+                      type="email"
                       {...field}
-                      className="h-14 pl-14 text-lg text-gray-700 "
+                      className="h-14 pl-14 text-lg text-gray-7 "
                     />
                   </div>
                 </FormControl>
@@ -135,17 +137,17 @@ export default function SignUp() {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem className=" mb-2">
+              <FormItem>
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-400">
+                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-6">
                       <Password size={32} weight="thin" />
                     </span>
                     <Input
                       placeholder="Password"
                       type="password"
                       {...field}
-                      className="h-14 pl-14 text-lg text-gray-700 "
+                      className="h-14 pl-14 text-lg text-gray-7 "
                     />
                   </div>
                 </FormControl>
@@ -157,18 +159,17 @@ export default function SignUp() {
             control={form.control}
             name="confirmPassword"
             render={({ field }) => (
-              <FormItem className=" mb-2">
-                {/* <FormLabel>Password</FormLabel> */}
+              <FormItem>
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-400">
+                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-6">
                       <Password size={32} weight="thin" />
                     </span>
                     <Input
                       placeholder="Retype password"
                       type="password"
                       {...field}
-                      className="h-14 pl-14 text-lg text-gray-700 "
+                      className="h-14 pl-14 text-lg text-gray-7 "
                     />
                   </div>
                 </FormControl>
@@ -178,7 +179,7 @@ export default function SignUp() {
           />
           <Button
             type="submit"
-            className="my-2 h-14 w-full bg-blue-600 text-base transition-all hover:bg-blue-700"
+            className="mt-2 h-14 w-full bg-blue-6 text-base transition-all hover:bg-blue-7"
           >
             Create account
           </Button>
@@ -186,17 +187,16 @@ export default function SignUp() {
       </Form>
       <Button
         variant={"outline"}
-        className="h-14 w-full text-base text-gray-700"
+        className="text-gray-700 mt-1 h-14 w-full text-base sm:mt-2"
       >
         <img src="/google-logo.svg" alt="logo" className="mr-2 h-9 w-9" />
         Sign up with google
       </Button>
-      <p className="mt-2 text-center text-gray-500">
-        Have an account?
-        <Link to={"/registration/login"} className="p-0 text-blue-500">
-          Login now
-        </Link>
-      </p>
+      <RegistrationFooter
+        text="Already have an account?"
+        linkText="Login now"
+        to="/registration/login"
+      />
     </div>
   );
 }

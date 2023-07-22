@@ -15,6 +15,8 @@ import { Envelope, Password } from "@phosphor-icons/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
+import RegistrationHeader from "./RegistrationHeader";
+import RegistrationFooter from "./RegistrationFooter";
 import { Link } from "react-router-dom";
 
 const formSchema = z.object({
@@ -45,20 +47,15 @@ export default function Login() {
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
     values: z.infer<typeof formSchema>,
   ) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   };
 
   return (
     <div className="mx-auto">
-      <h1 className="mb-2 scroll-m-20 text-4xl font-bold tracking-tight text-gray-900 lg:text-5xl">
-        Login
-      </h1>
-
-      <p className="mb-8 leading-7 text-gray-500 [&:not(:first-child)]:mt-4">
-        Login and continue creating. Your creativity awaits.
-      </p>
+      <RegistrationHeader
+        title="Login"
+        description="Login and continue creating. Your creativity awaits."
+      />
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -69,13 +66,14 @@ export default function Login() {
               <FormItem className=" mb-2">
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-400">
+                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-6">
                       <Envelope size={32} weight="thin" />
                     </span>
                     <Input
                       placeholder="Email"
+                      type="email"
                       {...field}
-                      className="h-14 pl-14 text-lg text-gray-700 "
+                      className="h-14 pl-14 text-lg text-gray-7 "
                     />
                   </div>
                 </FormControl>
@@ -90,14 +88,14 @@ export default function Login() {
               <FormItem className=" mb-2">
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-400">
+                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-6">
                       <Password size={32} weight="thin" />
                     </span>
                     <Input
                       placeholder="Password"
                       type="password"
                       {...field}
-                      className="h-14 pl-14 text-lg text-gray-700 "
+                      className="h-14 pl-14 text-lg text-gray-7 "
                     />
                   </div>
                 </FormControl>
@@ -105,31 +103,29 @@ export default function Login() {
               </FormItem>
             )}
           />
-          <Button variant={"link"} className="mb-4 p-0 text-blue-400">
+          <Link
+            className="mb-4 inline-block p-0 text-blue-4 hover:underline"
+            to={""}
+          >
             Forget password?
-          </Button>
+          </Link>
           <Button
             type="submit"
-            className="mb-2 h-14 w-full bg-blue-600 text-base transition-all hover:bg-blue-700"
+            className="mb-2 h-14 w-full bg-blue-6 text-base transition-all hover:bg-blue-7"
           >
             Continue
           </Button>
         </form>
       </Form>
-      <Button
-        variant={"outline"}
-        className="h-14 w-full text-base text-gray-700"
-      >
-        {" "}
+      <Button variant={"outline"} className="h-14 w-full text-base text-gray-8">
         <img src="/google-logo.svg" alt="logo" className="mr-2 h-9 w-9" />
         Login with google
       </Button>
-      <p className="mt-2 text-center text-gray-500">
-        New to storybook?{" "}
-        <Link to={"/registration/signup"} className="p-0 text-blue-500">
-          Sign up for free
-        </Link>
-      </p>
+      <RegistrationFooter
+        text="New to storytime?"
+        linkText="Sign up for free"
+        to="/registration/signup"
+      />
     </div>
   );
 }

@@ -8,8 +8,10 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
-    screens: {
-      md: "800px",
+    extend: {
+      screens: {
+        md: "800px",
+      },
     },
     container: {
       center: true,
@@ -18,6 +20,7 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    colors: require("tailwindcss-open-color"),
     extend: {
       colors: {
         border: "hsl(var(--border))",
