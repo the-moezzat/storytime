@@ -67,7 +67,6 @@ export default function Login() {
             name="email"
             render={({ field }) => (
               <FormItem className=" mb-2">
-                {/* <FormLabel>Email</FormLabel> */}
                 <FormControl>
                   <div className="relative">
                     <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-400">
@@ -89,7 +88,6 @@ export default function Login() {
             name="password"
             render={({ field }) => (
               <FormItem className=" mb-2">
-                {/* <FormLabel>Password</FormLabel> */}
                 <FormControl>
                   <div className="relative">
                     <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-400">
@@ -107,7 +105,7 @@ export default function Login() {
               </FormItem>
             )}
           />
-          <Button variant={"link"} className="mb-4 p-0 text-blue-600">
+          <Button variant={"link"} className="mb-4 p-0 text-blue-400">
             Forget password?
           </Button>
           <Button

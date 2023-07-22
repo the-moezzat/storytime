@@ -17,25 +17,31 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const formSchema = z.object({
-  email: z.string().email({
-    message: "Invalid email address",
-  }),
-  password: z
-    .string()
-    .min(8, {
-      message: "Password must be at least 8 characters long",
-    })
-    .max(50, {
-      message: "Password must be at most 50 characters long",
+const formSchema = z
+  .object({
+    email: z.string().email({
+      message: "Invalid email address",
     }),
-  firstName: z.string().min(1, {
-    message: "First name must be at least 1 character long",
-  }),
-  lastName: z.string().min(1, {
-    message: "last name must be at least 1 character long",
-  }),
-});
+    password: z
+      .string()
+      .min(6, {
+        message: "Password must be at least 6 characters long",
+      })
+      .max(50, {
+        message: "Password must be at most 50 characters long",
+      }),
+    confirmPassword: z.string().min(6),
+    firstName: z.string().min(1, {
+      message: "First name must be at least 1 character long",
+    }),
+    lastName: z.string().min(1, {
+      message: "last name must be at least 1 character long",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 export default function SignUp() {
   // 1. Define your form.
@@ -46,6 +52,7 @@ export default function SignUp() {
       lastName: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -58,7 +65,7 @@ export default function SignUp() {
 
   return (
     <div className="mx-auto">
-      <h1 className="mb-2 scroll-m-20 text-4xl font-bold tracking-tight text-gray-900 lg:text-5xl">
+      <h1 className="lg:text-5xl mb-2 scroll-m-20 text-4xl font-bold tracking-tight text-gray-900">
         Sign up
       </h1>
 
@@ -129,7 +136,6 @@ export default function SignUp() {
             name="password"
             render={({ field }) => (
               <FormItem className=" mb-2">
-                {/* <FormLabel>Password</FormLabel> */}
                 <FormControl>
                   <div className="relative">
                     <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-400">
@@ -149,7 +155,7 @@ export default function SignUp() {
           />
           <FormField
             control={form.control}
-            name="password"
+            name="confirmPassword"
             render={({ field }) => (
               <FormItem className=" mb-2">
                 {/* <FormLabel>Password</FormLabel> */}
@@ -172,7 +178,7 @@ export default function SignUp() {
           />
           <Button
             type="submit"
-            className="mb-2 h-14 w-full bg-blue-600 text-base transition-all hover:bg-blue-700"
+            className="my-2 h-14 w-full bg-blue-600 text-base transition-all hover:bg-blue-700"
           >
             Create account
           </Button>
@@ -182,7 +188,6 @@ export default function SignUp() {
         variant={"outline"}
         className="h-14 w-full text-base text-gray-700"
       >
-        {" "}
         <img src="/google-logo.svg" alt="logo" className="mr-2 h-9 w-9" />
         Sign up with google
       </Button>
