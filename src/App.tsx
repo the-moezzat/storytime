@@ -1,7 +1,7 @@
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Registration from "./pages/Registration";
 import Login from "./features/registration/Login";
-import SignUp from "./features/registration/SignUp";
+// import SignUp from "./features/registration/SignUp";
 import { Button } from "./ui/button";
 
 function App() {
@@ -18,8 +18,7 @@ function App() {
         />
         <Route path="registration" element={<Registration />}>
           <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-          Route
+          {/* <Route path="signup" element={<SignUp />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
