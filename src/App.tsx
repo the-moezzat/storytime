@@ -7,6 +7,7 @@ import AppLayout from "./pages/AppLayout";
 import Dashboard from "./features/dashboard/Dashboard";
 import Create from "./features/dashboard/Create";
 import Viewer from "./features/dashboard/Viewer";
+import Home from "./features/dashboard/Home";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="app" element={<AppLayout />}>
           <Route index element={<Navigate replace to="dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="Home" element={<Home />} />
           <Route path="create" element={<Create />} />
           <Route path="view/:id" element={<Viewer />} />
         </Route>

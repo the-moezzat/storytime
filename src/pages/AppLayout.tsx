@@ -3,9 +3,9 @@ import DashboardHeader from "../features/dashboard/DashboardHeader";
 
 function AppLayout() {
   return (
-    <div className="container">
+    <div className="container grid h-screen grid-rows-[auto,1fr]">
       <DashboardHeader />
-      <div>
+      <div className="rounded-t-3xl bg-gray-0">
         <Outlet />
       </div>
     </div>
