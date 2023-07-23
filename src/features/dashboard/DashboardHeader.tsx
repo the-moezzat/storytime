@@ -3,15 +3,7 @@ import { Button } from "../../ui/button";
 import { Progress } from "../../ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import Navbar from "../../ui/Navbar";
-import { styled } from "styled-components";
-
-const Raw = styled.div<{ variant?: string; gap?: string }>`
-  display: flex;
-  align-items: center;
-  flex-direction: ${(props) =>
-    props.variant === "vertical" ? "column" : "row"};
-  gap: ${(props) => props.gap || "0"};
-`;
+import Raw from "../../ui/Row";
 
 function DashboardHeader() {
   return (
