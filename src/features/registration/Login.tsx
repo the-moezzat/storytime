@@ -48,6 +48,14 @@ export default function Login() {
     },
   });
 
+  if (error) {
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: "password or email incorrect",
+    });
+  }
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -67,17 +75,9 @@ export default function Login() {
     values: z.infer<typeof formSchema>,
   ) => {
     if (isLoading) return;
-
     mutate(values);
 
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "password or email incorrect",
-      });
-      return;
-    }
+    return;
   };
 
   return (
