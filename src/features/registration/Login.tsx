@@ -19,7 +19,7 @@ import RegistrationHeader from "./RegistrationHeader";
 import RegistrationFooter from "./RegistrationFooter";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "../../ui/use-toast";
-import { login } from "../../services/apiAuth";
+import { login, signInWithGoogle } from "../../services/apiAuth";
 import { useMutation } from "react-query";
 
 const formSchema = z.object({
@@ -47,6 +47,13 @@ export default function Login() {
       navigate("/app");
     },
   });
+
+  async function handleGoogle() {
+    console.log("google");
+    const data = await signInWithGoogle();
+
+    console.log(data);
+  }
 
   if (error) {
     toast({
@@ -148,7 +155,11 @@ export default function Login() {
           </Button>
         </form>
       </Form>
-      <Button variant={"outline"} className="h-14 w-full text-base text-gray-8">
+      <Button
+        variant={"outline"}
+        className="h-14 w-full text-base text-gray-8"
+        onClick={handleGoogle}
+      >
         <img src="/google-logo.svg" alt="logo" className="mr-2 h-9 w-9" />
         Login with google
       </Button>

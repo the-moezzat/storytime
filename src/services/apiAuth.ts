@@ -61,6 +61,16 @@ export async function logout() {
   if (error) throw new Error(error.message);
 }
 
+export async function signInWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+  });
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
 /* export async function updateCurrentUser({
   password,
   fullName,
