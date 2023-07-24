@@ -16,19 +16,21 @@ function Book({ book }: { book: IBook }) {
           />
         </AspectRatio>
       </div>
-      <Raw variant="vertical" gap="4px" className="items-start">
-        <p className="text-lg font-bold text-gray-7">{book.title}</p>
+      <Raw variant="vertical" gap="6px" className="items-start">
+        <p className="text-lg font-bold leading-tight text-gray-7">
+          {book.title}
+        </p>
         <Raw className="flex-wrap" gap="4px">
           {book?.badges?.map((badge) => (
             <Badge variant={"outline"}>{badge}</Badge>
           ))}
         </Raw>
-        <polyline className="text-sm text-gray-6">
-          {book.numberOfChapters} chapters
-        </polyline>
-        <Raw gap="16px" className="mt-auto">
-          <Button>Download</Button>
-          <Button variant="secondary">View</Button>
+        <p className="text-sm text-gray-6">{book.numberOfChapters} chapters</p>
+        <Raw gap="12px" className="mt-auto">
+          <Button size={"sm"}>Download</Button>
+          <Button size={"sm"} variant="secondary">
+            View
+          </Button>
         </Raw>
       </Raw>
     </Raw>
