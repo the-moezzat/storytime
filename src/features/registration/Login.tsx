@@ -17,7 +17,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import RegistrationHeader from "./RegistrationHeader";
 import RegistrationFooter from "./RegistrationFooter";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "../../ui/use-toast";
+import { login } from "../../services/apiAuth";
+import { useMutation } from "react-query";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -25,8 +28,8 @@ const formSchema = z.object({
   }),
   password: z
     .string()
-    .min(8, {
-      message: "Password must be at least 8 characters long",
+    .min(6, {
+      message: "Password must be at least 6 characters long",
     })
     .max(50, {
       message: "Password must be at most 50 characters long",
@@ -34,6 +37,17 @@ const formSchema = z.object({
 });
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const { isLoading, mutate, error } = useMutation({
+    mutationKey: ["user"],
+    mutationFn: ({ email, password }: { email: string; password: string }) =>
+      login({ email, password }),
+    onSuccess: () => {
+      navigate("/app");
+    },
+  });
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,11 +57,27 @@ export default function Login() {
     },
   });
 
+  // const navigate = useNavigate();
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // void getUser();
+
   // 2. Define a submit handler.
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
     values: z.infer<typeof formSchema>,
   ) => {
-    console.log(values);
+    if (isLoading) return;
+
+    mutate(values);
+
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "password or email incorrect",
+      });
+      return;
+    }
   };
 
   return (
@@ -111,6 +141,7 @@ export default function Login() {
           </Link>
           <Button
             type="submit"
+            disabled={isLoading}
             className="mb-2 h-14 w-full bg-blue-6 text-base transition-all hover:bg-blue-7"
           >
             Continue

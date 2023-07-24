@@ -17,6 +17,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import RegistrationHeader from "./RegistrationHeader";
 import RegistrationFooter from "./RegistrationFooter";
+import { toast } from "../../ui/use-toast";
+import { signup } from "../../services/apiAuth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z
   .object({
@@ -57,11 +61,30 @@ export default function SignUp() {
     },
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   // 2. Define a submit handler.
-  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
-    values: z.infer<typeof formSchema>,
-  ) => {
-    console.log(values);
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async ({
+    firstName,
+    lastName,
+    email,
+    password,
+  }: z.infer<typeof formSchema>) => {
+    if (isLoading) return;
+    try {
+      setIsLoading(true);
+      // 2.1. Validate the form.
+      await signup({ firstName, lastName, email, password });
+      navigate("/app");
+    } catch (error) {
+      toast({
+        title: "You submitted the following values:",
+        description: "something went wrong",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -179,6 +202,7 @@ export default function SignUp() {
           />
           <Button
             type="submit"
+            disabled={isLoading}
             className="mt-2 h-14 w-full bg-blue-6 text-base transition-all hover:bg-blue-7"
           >
             Create account

@@ -25,7 +25,8 @@ export default function Dashboard() {
         </Link>
       </div>
       <main className="mt-6 grid grid-cols-3 gap-4">
-        {stories && stories.map((book) => <Book key={book.id} book={book} />)}
+        {stories &&
+          stories.map((story) => <Book key={story.id} book={story} />)}
       </main>
     </ScrollArea>
   );
