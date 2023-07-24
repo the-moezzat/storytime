@@ -12,6 +12,7 @@ import { Toaster } from "./ui/toaster";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import Generate from "./features/dashboard/Generate";
 // import { AuthProvider } from "./context/AuthProvider";
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
                 <Route index element={<Navigate replace to="dashboard" />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="Home" element={<Home />} />
-                <Route path="create" element={<Create />} />
+                <Route path="create" element={<Generate />} />
                 <Route path="view/:id" element={<Viewer />} />
               </Route>
             </Route>

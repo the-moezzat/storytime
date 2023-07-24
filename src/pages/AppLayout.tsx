@@ -7,7 +7,7 @@ function AppLayout() {
     <div className="container flex h-screen flex-col">
       <DashboardHeader />
       <ScrollArea className="h-full rounded-t-3xl bg-gray-0 py-4">
-        <div className="px-6">
+        <div className="px-4">
           <Outlet />
         </div>
       </ScrollArea>
