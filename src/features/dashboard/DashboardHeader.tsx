@@ -12,8 +12,8 @@ function DashboardHeader() {
       <Navbar />
       <Raw gap="18px">
         <Raw gap="12px">
-          <Raw variant="vertical" gap="8px">
-            <p>6 / 10 stories</p>
+          <Raw variant="vertical" gap="4px">
+            <p className="text-base text-gray-6">6 / 10 stories</p>
             <Progress value={60} />
           </Raw>
           <Button className="flex items-center gap-2 bg-blue-6 text-white hover:bg-blue-7">
