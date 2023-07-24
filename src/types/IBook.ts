@@ -1,10 +1,10 @@
 export default interface IBook {
-  badges: string[] | null;
-  bookUrl: string | null;
-  created_at: string | null;
+  badges: string[];
+  bookUrl: string;
+  created_at: string;
   downloadLink: string | null;
   id: number;
-  image: string | null;
-  numberOfChapters: number | null;
-  title: string | null;
+  image: string;
+  numberOfChapters: number;
+  title: string;
 }
