@@ -17,14 +17,14 @@ function Book({ book }: { book: IBook }) {
         </AspectRatio>
       </div>
       <Raw variant="vertical" gap="4px" className="items-start">
-        <p className="text-lg font-bold text-gray-7">{book.name}</p>
+        <p className="text-lg font-bold text-gray-7">{book.title}</p>
         <Raw className="flex-wrap" gap="4px">
           {book.badges.map((badge) => (
             <Badge variant={"outline"}>{badge}</Badge>
           ))}
         </Raw>
         <polyline className="text-sm text-gray-6">
-          {book.numChapter} chapters
+          {book.numberOfChapters} chapters
         </polyline>
         <Raw gap="16px" className="mt-auto">
           <Button>Download</Button>

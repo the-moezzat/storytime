@@ -9,35 +9,42 @@ import Create from "./features/dashboard/Create";
 import Viewer from "./features/dashboard/Viewer";
 import Home from "./features/dashboard/Home";
 import { Toaster } from "./ui/toaster";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Button>
-                <Link to={"registration/login"}>Login</Link>
-              </Button>
-            }
-          />
-          <Route path="registration" element={<Registration />}>
-            <Route index element={<Navigate replace to="login" />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<SignUp />} />
-          </Route>
-          <Route path="app" element={<AppLayout />}>
-            <Route index element={<Navigate replace to="dashboard" />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="Home" element={<Home />} />
-            <Route path="create" element={<Create />} />
-            <Route path="view/:id" element={<Viewer />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      <Toaster />
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Button>
+                  <Link to={"registration/login"}>Login</Link>
+                </Button>
+              }
+            />
+            <Route path="registration" element={<Registration />}>
+              <Route index element={<Navigate replace to="login" />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<SignUp />} />
+            </Route>
+            <Route path="app" element={<AppLayout />}>
+              <Route index element={<Navigate replace to="dashboard" />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="Home" element={<Home />} />
+              <Route path="create" element={<Create />} />
+              <Route path="view/:id" element={<Viewer />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        <Toaster />
+      </QueryClientProvider>
     </>
   );
 }
