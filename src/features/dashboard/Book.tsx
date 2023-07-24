@@ -10,7 +10,7 @@ function Book({ book }: { book: IBook }) {
       <div className="w-24 overflow-hidden rounded-2xl">
         <AspectRatio ratio={3 / 4}>
           <img
-            src={book.image}
+            src={book?.image || ""}
             alt="book cover"
             className="h-full object-cover"
           />
@@ -19,7 +19,7 @@ function Book({ book }: { book: IBook }) {
       <Raw variant="vertical" gap="4px" className="items-start">
         <p className="text-lg font-bold text-gray-7">{book.title}</p>
         <Raw className="flex-wrap" gap="4px">
-          {book.badges.map((badge) => (
+          {book?.badges?.map((badge) => (
             <Badge variant={"outline"}>{badge}</Badge>
           ))}
         </Raw>
