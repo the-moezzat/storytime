@@ -28,6 +28,8 @@ import {
 } from "../../ui/select";
 import { useState } from "react";
 import { Switch } from "../../ui/switch";
+import { useRef } from "react";
+import { ReactEpubViewer } from "react-epub-viewer";
 
 const formSchema = z.object({
   description: z.string().min(60, {
@@ -63,6 +65,8 @@ function Generate() {
       tone: "kids",
     },
   });
+
+  const viewerRef = useRef(null);
 
   // 2. Define a submit handler.
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
@@ -276,7 +280,21 @@ function Generate() {
           </form>
         </Form>
       </div>
-      <div className="col-span-8 rounded-xl bg-white"></div>
+      <div className="col-span-8 rounded-xl bg-white">
+        <div className="h-max w-[500px]">
+          <ReactEpubViewer
+            url={"/Requiem of Shadows and Whispers.epub"}
+            ref={viewerRef}
+            viewerStyle={{
+              fontSize: 16,
+            }}
+            viewerOption={{
+              flow: "paginated",
+              spread: "auto",
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
