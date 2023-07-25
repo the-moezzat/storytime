@@ -1,5 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Sparkle } from "@phosphor-icons/react";
+import { CircleNotch, Sparkle } from "@phosphor-icons/react";
 import { Button } from "../../ui/button";
 import Raw from "../../ui/Row";
 import { Textarea } from "../../ui/textarea";
@@ -28,6 +33,7 @@ import {
 } from "../../ui/select";
 import { useState } from "react";
 import { Switch } from "../../ui/switch";
+import useGenerate from "../../hooks/useGenerate";
 
 const formSchema = z.object({
   description: z.string().min(60, {
@@ -50,12 +56,23 @@ const formSchema = z.object({
   }),
 });
 
-function GenerateForm() {
+function GenerateForm({
+  setStory,
+}: {
+  setStory: React.Dispatch<React.SetStateAction<boolean | undefined | string>>;
+}) {
   const [isDisable, setIsDisable] = useState(true);
+  const { generate, story, isLoading } = useGenerate();
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
     values: z.infer<typeof formSchema>,
   ) => {
+    if (isLoading) return;
+
+    const { description } = values;
+
+    generate(description);
+
     toast({
       title: "You submitted the following values:",
       description: (
@@ -64,8 +81,11 @@ function GenerateForm() {
         </pre>
       ),
     });
-    console.log(values);
+    // console.log(values);
   };
+
+  console.log(isLoading || story?.join(""));
+  setStory(isLoading || story?.join(""));
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -265,9 +285,21 @@ function GenerateForm() {
           <Button
             type="submit"
             className="mt-auto w-full space-x-3 px-6 py-6 text-lg"
+            disabled={isLoading}
           >
-            <Sparkle weight="fill" />
-            <span> Generate </span>
+            {isLoading ? (
+              <>
+                <div className=" animate-spin">
+                  <CircleNotch weight="fill" />
+                </div>
+                <span> Generating </span>
+              </>
+            ) : (
+              <>
+                <Sparkle weight="fill" />
+                <span> Generate </span>
+              </>
+            )}
           </Button>
         </form>
       </Form>
