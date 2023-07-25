@@ -280,18 +280,11 @@ function Generate() {
           </form>
         </Form>
       </div>
-      <div className="col-span-8 rounded-xl bg-white">
-        <div className="h-max w-[500px]">
+      <div className="col-span-full rounded-xl bg-white">
+        <div className="relative h-full">
           <ReactEpubViewer
             url={"/Requiem of Shadows and Whispers.epub"}
             ref={viewerRef}
-            viewerStyle={{
-              fontSize: 16,
-            }}
-            viewerOption={{
-              flow: "paginated",
-              spread: "auto",
-            }}
           />
         </div>
       </div>
