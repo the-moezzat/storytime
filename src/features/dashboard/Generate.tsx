@@ -7,10 +7,8 @@ function Generate() {
       <div className="col-span-7 rounded-xl bg-white p-4">
         <GenerateForm />
       </div>
-      <div className="col-span-8 rounded-xl bg-white">
-        <div className="h-max w-[500px]">
-          <EbupReader />
-        </div>
+      <div className="col-[8_/_span_17] rounded-xl bg-white">
+        <EbupReader />
       </div>
     </div>
   );
