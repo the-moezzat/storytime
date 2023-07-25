@@ -29,7 +29,6 @@
     "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-epub-viewer": "^0.2.0",
     "react-hook-form": "^7.45.2",
     "react-query": "^3.39.3",
     "react-reader": "^1.2.1",
