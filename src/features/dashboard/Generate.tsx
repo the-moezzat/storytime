@@ -2,11 +2,11 @@
 import GenerateForm from "./GenerateForm";
 import EbupReader from "./EbupReader";
 import { Button } from "../../ui/button";
-import Replicate from "replicate";
+// import Replicate from "replicate";
 
-const replicate = new Replicate({
-  auth: "r8_cPuiVse21b4DCCTmfPAwwcQNwF0jnXI1ZNg7d",
-});
+// const replicate = new Replicate({
+//   auth: "r8_cPuiVse21b4DCCTmfPAwwcQNwF0jnXI1ZNg7d",
+// });
 
 // Replace these variables with your actual values
 const apiUrl = "https://api.replicate.com/v1/predictions";
