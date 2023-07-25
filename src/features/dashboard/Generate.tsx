@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import GenerateForm from "./GenerateForm";
-import EbupReader from "./EbupReader";
+// import EbupReader from "./EbupReader";
 import { useState } from "react";
 // import Replicate from "replicate";
 
