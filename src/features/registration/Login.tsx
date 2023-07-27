@@ -82,7 +82,7 @@ export default function Login() {
     values: z.infer<typeof formSchema>,
   ) => {
     if (isLoading) return;
-    mutate(values);
+    mutate({ email: values.email, password: values.password });
 
     return;
   };
