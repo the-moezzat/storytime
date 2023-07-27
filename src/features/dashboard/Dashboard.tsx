@@ -7,10 +7,10 @@ import { getStories } from "../../services/apiStories";
 import { ScrollArea } from "../../ui/scroll-area";
 
 export default function Dashboard() {
-  const { id } = useQueryClient().getQueryData(["user"]);
+  const { id }: { id: string } = useQueryClient().getQueryData(["user"]);
 
   const { isLoading, data: stories } = useQuery("stories", () =>
-    getStories(id as string),
+    getStories(id),
   );
 
   if (isLoading) return <div>Loading...</div>;
