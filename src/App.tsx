@@ -6,7 +6,6 @@ import SignUp from "./features/registration/SignUp";
 import AppLayout from "./pages/AppLayout";
 import Dashboard from "./features/dashboard/Dashboard";
 // import Create from "./features/dashboard/Create";
-import Viewer from "./features/dashboard/Viewer";
 import Home from "./features/dashboard/Home";
 import { Toaster } from "./ui/toaster";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -44,7 +43,6 @@ function App() {
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="Home" element={<Home />} />
                 <Route path="create" element={<Generate />} />
-                <Route path="view/:id" element={<Viewer />} />
               </Route>
             </Route>
           </Routes>

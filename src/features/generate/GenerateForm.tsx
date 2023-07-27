@@ -8,9 +8,6 @@ import { CircleNotch, Sparkle } from "@phosphor-icons/react";
 import { Button } from "../../ui/button";
 import Raw from "../../ui/Row";
 import { Textarea } from "../../ui/textarea";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "../../ui/use-toast";
 import {
   Form,
@@ -34,65 +31,63 @@ import {
 import { useState } from "react";
 import { Switch } from "../../ui/switch";
 import useGenerate from "../../hooks/useGenerate";
+import useGenerateForm from "./useGenerateForm";
 
-const formSchema = z.object({
-  description: z.string().min(60, {
-    message: "Description must be at least 60 characters long",
-  }),
-  numberOfChapters: z
-    .string()
-    .min(1, {
-      message: "Number of chapters must be at least 1",
-    })
-    .max(2, {
-      message: "Number of chapters must be at most 13",
-    }),
-  title: z.string().min(6),
-  pointOfView: z.enum(["first", "second", "third"], {
-    required_error: "You need to select a point of view.",
-  }),
-  tone: z.string({
-    required_error: "Please select an tone.",
-  }),
-});
+// const formSchema = z.object({
+//   description: z.string().min(60, {
+//     message: "Description must be at least 60 characters long",
+//   }),
+//   numberOfChapters: z
+//     .string()
+//     .min(1, {
+//       message: "Number of chapters must be at least 1",
+//     })
+//     .max(2, {
+//       message: "Number of chapters must be at most 13",
+//     }),
+//   title: z.string().min(6),
+//   pointOfView: z.enum(["first", "second", "third"], {
+//     required_error: "You need to select a point of view.",
+//   }),
+//   tone: z.string({
+//     required_error: "Please select an tone.",
+//   }),
+// });
 
 function GenerateForm() {
   const [isDisable, setIsDisable] = useState(true);
   const { generate, story, isLoading } = useGenerate();
 
-  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
-    values: z.infer<typeof formSchema>,
-  ) => {
-    if (isLoading) return;
-
-    const { description } = values;
-
-    generate(description);
-
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-gray-9 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-    });
-    // console.log(values);
-  };
-
-  console.log(isLoading || story);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
+  const { form, onSubmit } = useGenerateForm(
+    {
       description: "",
       numberOfChapters: "1",
       title: isDisable ? "Leave AI generate title" : "",
       pointOfView: "first",
       tone: "kids",
     },
-  });
-  
+    (values) => {
+      if (isLoading) return;
+
+      const { description } = values;
+
+      generate(description);
+
+      toast({
+        title: "You submitted the following values:",
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-gray-9 p-4">
+            <code className="text-white">
+              {JSON.stringify(values, null, 2)}
+            </code>
+          </pre>
+        ),
+      });
+    },
+  );
+
+  console.log(isLoading || story);
+
   return (
     <div>
       <Form {...form}>
