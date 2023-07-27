@@ -9,9 +9,10 @@ import Raw from "../../ui/Row";
 import { useQueryClient } from "react-query";
 
 function DashboardHeader() {
-  const user = useQueryClient().getQueryData(["user"]);
-
-  const { firstName, lastName } = user.user_metadata;
+  const {
+    use_metadata: { firstName, lastName },
+  }: { use_metadata: { firstName: string; lastName: string } } =
+    useQueryClient().getQueryData(["user"]);
 
   return (
     <div className="flex items-center justify-between p-4">
