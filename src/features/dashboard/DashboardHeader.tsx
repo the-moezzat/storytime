@@ -10,10 +10,11 @@ import { useQueryClient } from "react-query";
 
 function DashboardHeader() {
   const {
-    use_metadata: { firstName, lastName },
-  }: { use_metadata: { firstName: string; lastName: string } } =
+    user_metadata: { firstName, lastName },
+  }: { user_metadata: { firstName: string; lastName: string } } =
     useQueryClient().getQueryData(["user"]);
 
+  // const { firstName, lastName } = user.user_metadata;
   return (
     <div className="flex items-center justify-between p-4">
       <img src="/logo.svg" alt="logo" className="h-10" />
