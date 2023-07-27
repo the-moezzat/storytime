@@ -12,7 +12,7 @@ import { Toaster } from "./ui/toaster";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ProtectedRoute from "./ui/ProtectedRoute";
-import Generate from "./features/dashboard/Generate";
+import Generate from "./features/generate/Generate";
 // import { AuthProvider } from "./context/AuthProvider";
 
 function App() {

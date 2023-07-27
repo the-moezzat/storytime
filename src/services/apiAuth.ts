@@ -18,6 +18,8 @@ export async function signup({
       data: {
         firstName,
         lastName,
+        credit: 10,
+        usedCredit: 0,
         avatar: "",
       },
     },

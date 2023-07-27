@@ -2,12 +2,16 @@ import { PlusCircle } from "@phosphor-icons/react";
 import { Button } from "../../ui/button";
 import { Link } from "react-router-dom";
 import Book from "./Book";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { getStories } from "../../services/apiStories";
 import { ScrollArea } from "../../ui/scroll-area";
 
 export default function Dashboard() {
-  const { isLoading, data: stories } = useQuery("stories", getStories);
+  const { id } = useQueryClient().getQueryData(["user"]);
+
+  const { isLoading, data: stories } = useQuery("stories", () =>
+    getStories(id as string),
+  );
 
   if (isLoading) return <div>Loading...</div>;
 

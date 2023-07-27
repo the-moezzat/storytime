@@ -4,56 +4,66 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export interface Database {
   public: {
     Tables: {
       stories: {
         Row: {
-          badges: string[] | null
-          bookUrl: string | null
-          created_at: string | null
-          downloadLink: string | null
-          id: number
-          image: string | null
-          numberOfChapters: number | null
-          title: string | null
-        }
+          badges: string[] | null;
+          bookUrl: string | null;
+          created_at: string | null;
+          downloadLink: string | null;
+          id: number;
+          image: string | null;
+          numberOfChapters: number | null;
+          title: string | null;
+          user_id: string | null;
+        };
         Insert: {
-          badges?: string[] | null
-          bookUrl?: string | null
-          created_at?: string | null
-          downloadLink?: string | null
-          id?: number
-          image?: string | null
-          numberOfChapters?: number | null
-          title?: string | null
-        }
+          badges?: string[] | null;
+          bookUrl?: string | null;
+          created_at?: string | null;
+          downloadLink?: string | null;
+          id?: number;
+          image?: string | null;
+          numberOfChapters?: number | null;
+          title?: string | null;
+          user_id?: string | null;
+        };
         Update: {
-          badges?: string[] | null
-          bookUrl?: string | null
-          created_at?: string | null
-          downloadLink?: string | null
-          id?: number
-          image?: string | null
-          numberOfChapters?: number | null
-          title?: string | null
-        }
-        Relationships: []
-      }
-    }
+          badges?: string[] | null;
+          bookUrl?: string | null;
+          created_at?: string | null;
+          downloadLink?: string | null;
+          id?: number;
+          image?: string | null;
+          numberOfChapters?: number | null;
+          title?: string | null;
+          user_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "stories_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Enums: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
+      [_ in never]: never;
+    };
+  };
 }

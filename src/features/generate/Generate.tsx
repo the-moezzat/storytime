@@ -2,14 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
+import { useQueryClient } from "react-query";
 import GenerateForm from "./GenerateForm";
-// import EbupReader from "./EbupReader";
-import { useState } from "react";
-// import Replicate from "replicate";
-
-// const replicate = new Replicate({
-//   auth: "r8_cPuiVse21b4DCCTmfPAwwcQNwF0jnXI1ZNg7d",
-// });
+import EbupReader from "./EbupReader";
 
 // // Replace these variables with your actual values
 // const apiUrl = "https://api.replicate.com/v1/predictions";
@@ -22,15 +17,18 @@ import { useState } from "react";
 // Data to be sent in the request body
 
 function Generate() {
-  const [story, setStory] = useState<boolean | undefined | string>("");
+  // const queryClient = useQueryClient();
+
+  // const data: undefined | string = queryClient.getQueryData(["story"]);
+
   return (
     <div className="grid h-full grid-cols-[repeat(24,1fr)] gap-4">
       <div className="col-span-7 rounded-xl bg-white p-4">
-        <GenerateForm setStory={setStory} />
+        <GenerateForm />
       </div>
       <div className="col-[8_/_span_17] rounded-xl bg-white">
-        <div className="text-base">{story}</div>
-        {/* <EbupReader /> */}
+        {/* <div className="text-base">{data}</div> */}
+        <EbupReader />
       </div>
     </div>
   );

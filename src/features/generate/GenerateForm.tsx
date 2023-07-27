@@ -56,11 +56,7 @@ const formSchema = z.object({
   }),
 });
 
-function GenerateForm({
-  setStory,
-}: {
-  setStory: React.Dispatch<React.SetStateAction<boolean | undefined | string>>;
-}) {
+function GenerateForm() {
   const [isDisable, setIsDisable] = useState(true);
   const { generate, story, isLoading } = useGenerate();
 
@@ -84,8 +80,7 @@ function GenerateForm({
     // console.log(values);
   };
 
-  console.log(isLoading || story?.join(""));
-  setStory(isLoading || story?.join(""));
+  console.log(isLoading || story);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -97,6 +92,7 @@ function GenerateForm({
       tone: "kids",
     },
   });
+  
   return (
     <div>
       <Form {...form}>
