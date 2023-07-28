@@ -35,7 +35,7 @@ function DashboardHeader() {
             <Bell size={24} color="#343a40" />
           </Button>
           <Avatar>
-            <AvatarImage src="https://githu.com/shacn.png" />
+            {/* <AvatarImage src="" /> */}
             <AvatarFallback>
               {firstName[0]}
               {lastName[0]}
