@@ -30,42 +30,45 @@ import {
 } from "../../ui/select";
 import { useState } from "react";
 import { Switch } from "../../ui/switch";
-import useGenerate from "../../hooks/useGenerate";
 import useGenerateForm from "./useGenerateForm";
+import axios from "axios";
+import { useMutation } from "react-query";
+import { objectToQueryString } from "../../utils/helper";
+
+const endpoint = "https://gpt-author-kx2ozxq4oa-uc.a.run.app/generate";
+
+// const body = {
+//   prompt:
+//     "Alex lives in Paris in 2050, where the effects of global warming are making it difficult to find food and water.",
+//   writing_style:
+//     "Clear and easily understandable, similar to a young adult novel. Highly descriptive and sometimes long-winded. Similar to the pulse-pounding intensity of J. R. R. Tolkien, or Stephen King or Agatha Christie.",
+//   num_chapters: 1,
+// };
 
 function GenerateForm() {
   const [isDisable, setIsDisable] = useState(true);
-  const { generate, story, isLoading } = useGenerate();
+
+  const { mutate: generate, isLoading } = useMutation(
+    (body: { prompt: string; writing_style: string; num_chapters: string }) =>
+      axios.post(`${endpoint}?${objectToQueryString(body)}`),
+    { mutationKey: ["story"] },
+  );
 
   const { form, onSubmit } = useGenerateForm(
     {
       description: "",
       numberOfChapters: "1",
+      tone: "",
       title: isDisable ? "Leave AI generate title" : "",
-      pointOfView: "first",
-      tone: "kids",
     },
     (values) => {
-      if (isLoading) return;
-
-      const { description } = values;
-
-      generate(description);
-
-      toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-gray-9 p-4">
-            <code className="text-white">
-              {JSON.stringify(values, null, 2)}
-            </code>
-          </pre>
-        ),
+      generate({
+        prompt: values.description,
+        writing_style: values.tone,
+        num_chapters: values.numberOfChapters,
       });
     },
   );
-
-  console.log(isLoading || story);
 
   return (
     <div>
@@ -79,6 +82,25 @@ function GenerateForm() {
                 <FormItem>
                   <FormLabel className="text-base text-gray-7">
                     Story details
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Type your message here."
+                      className="max-h-60 text-base text-gray-8"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="tone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base text-gray-7">
+                    Writing Style
                   </FormLabel>
                   <FormControl>
                     <Textarea
@@ -136,7 +158,7 @@ function GenerateForm() {
             className="mx-auto mb-3 w-11/12"
           />
 
-          <Raw variant="vertical" gap="12px" className="mb-4">
+          {/* <Raw variant="vertical" gap="12px" className="mb-4">
             <FormField
               control={form.control}
               name="pointOfView"
@@ -222,11 +244,10 @@ function GenerateForm() {
               )}
             />
           </Raw>
-
           <Separator
             orientation="horizontal"
             className="mx-auto mb-3 w-11/12"
-          />
+          /> */}
 
           <FormField
             control={form.control}
