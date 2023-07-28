@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 // import EbupReader from "./EbupReader";
 import GenerateForm from "./GenerateForm";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import axios from "axios";
 import { objectToQueryString } from "../../utils/helper";
 import StoryViewer from "./StoryViewer";
@@ -12,7 +12,7 @@ const endpoint = "https://gpt-author-kx2ozxq4oa-uc.a.run.app/generate";
 function Generate() {
   const {
     mutate: generate,
-    // data,
+    data,
     // error,
     isLoading,
   } = useMutation(
@@ -21,11 +21,11 @@ function Generate() {
     { mutationKey: ["story"] },
   );
 
-  const { data, isLoading: storyLoading } = useQuery({
-    queryKey: ["story"],
-    queryFn: () => axios("http://localhost:3000/story"),
-    staleTime: 0,
-  });
+  // const { data, isLoading: storyLoading } = useQuery({
+  //   queryKey: ["story"],
+  //   queryFn: () => axios("http://localhost:3000/story"),
+  //   staleTime: 0,
+  // });
 
   return (
     <>
@@ -34,7 +34,7 @@ function Generate() {
           <GenerateForm generate={generate} isLoading={isLoading} />
         </div>
         <div className="col-[8_/_span_17] rounded-xl bg-white p-4">
-          {storyLoading ? "loading..." : <StoryViewer story={data.data} />}
+          {isLoading ? "loading..." : <StoryViewer story={data.data} />}
           {/* <EbupReader /> */}
         </div>
       </div>
