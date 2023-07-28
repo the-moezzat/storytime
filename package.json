@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server:start": "json-server --watch ./data/data.json --delay 200"
+    "server:start": "json-server --watch ./data/data.json --delay 2000"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",

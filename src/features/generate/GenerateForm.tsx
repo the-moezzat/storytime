@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -8,7 +9,6 @@ import { CircleNotch, Sparkle } from "@phosphor-icons/react";
 import { Button } from "../../ui/button";
 import Raw from "../../ui/Row";
 import { Textarea } from "../../ui/textarea";
-import { toast } from "../../ui/use-toast";
 import {
   Form,
   FormControl,
@@ -19,53 +19,42 @@ import {
   FormMessage,
 } from "../../ui/form";
 import { Input } from "../../ui/input";
-import { Separator } from "../../ui/separator";
-import { RadioGroup, RadioGroupItem } from "../../ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../ui/select";
 import { useState } from "react";
 import { Switch } from "../../ui/switch";
 import useGenerateForm from "./useGenerateForm";
-import axios from "axios";
-import { useMutation } from "react-query";
-import { objectToQueryString } from "../../utils/helper";
+import { AxiosResponse } from "axios";
+import { UseMutateFunction } from "react-query";
 
-const endpoint = "https://gpt-author-kx2ozxq4oa-uc.a.run.app/generate";
+interface GenerateFormProp {
+  generate: UseMutateFunction<
+    AxiosResponse<any, any>,
+    unknown,
+    {
+      prompt: string;
+      writing_style: string;
+      num_chapters: number;
+    },
+    unknown
+  >;
+  isLoading: boolean;
+}
 
-// const body = {
-//   prompt:
-//     "Alex lives in Paris in 2050, where the effects of global warming are making it difficult to find food and water.",
-//   writing_style:
-//     "Clear and easily understandable, similar to a young adult novel. Highly descriptive and sometimes long-winded. Similar to the pulse-pounding intensity of J. R. R. Tolkien, or Stephen King or Agatha Christie.",
-//   num_chapters: 1,
-// };
-
-function GenerateForm() {
+function GenerateForm({ generate, isLoading }: GenerateFormProp) {
   const [isDisable, setIsDisable] = useState(true);
-
-  const { mutate: generate, isLoading } = useMutation(
-    (body: { prompt: string; writing_style: string; num_chapters: string }) =>
-      axios.post(`${endpoint}?${objectToQueryString(body)}`),
-    { mutationKey: ["story"] },
-  );
 
   const { form, onSubmit } = useGenerateForm(
     {
-      description: "",
+      description:
+        "Alex lives in Paris in 2050, where the effects of global warming are making it difficult to find food and water.",
       numberOfChapters: "1",
-      tone: "",
+      tone: "Clear and easily understandable, similar to a young adult novel. Highly descriptive and sometimes long-winded. Similar to the pulse-pounding intensity of J. R. R. Tolkien, or Stephen King or Agatha Christie.",
       title: isDisable ? "Leave AI generate title" : "",
     },
     (values) => {
       generate({
         prompt: values.description,
         writing_style: values.tone,
-        num_chapters: values.numberOfChapters,
+        num_chapters: Number(values.numberOfChapters),
       });
     },
   );
@@ -116,49 +105,29 @@ function GenerateForm() {
 
             <FormField
               control={form.control}
-              name="title"
+              name="numberOfChapters"
               render={({ field }) => (
                 <FormItem>
-                  <Raw className="justify-between">
-                    <FormLabel className="text-base text-gray-7">
-                      Title
-                    </FormLabel>
-                    <Raw gap="8px" className="items-center">
-                      <Switch
-                        checked={isDisable}
-                        onCheckedChange={() =>
-                          setIsDisable((disable) => !disable)
-                        }
-                      />
-                      <span className="text-sm font-medium text-gray-6">
-                        Leave it to AI
-                      </span>
-                    </Raw>
-                  </Raw>
+                  <FormLabel className="text-base text-gray-7">
+                    Number of chapters
+                  </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Title of the storybook"
+                      placeholder="Number of chapters"
+                      type="number"
                       {...field}
                       className="h-12 text-base text-gray-8"
-                      disabled={isDisable}
-                      value={
-                        isDisable ? "Leave AI generate title" : field.value
-                      }
                     />
                   </FormControl>
-
+                  <FormDescription>
+                    maximum number of chapters is 5
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </Raw>
 
-          <Separator
-            orientation="horizontal"
-            className="mx-auto mb-3 w-11/12"
-          />
-
-          {/* <Raw variant="vertical" gap="12px" className="mb-4">
+            {/* <Raw variant="vertical" gap="12px" className="mb-4">
             <FormField
               control={form.control}
               name="pointOfView"
@@ -249,29 +218,45 @@ function GenerateForm() {
             className="mx-auto mb-3 w-11/12"
           /> */}
 
-          <FormField
-            control={form.control}
-            name="numberOfChapters"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-base text-gray-7">
-                  Number of chapters
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Number of chapters"
-                    type="number"
-                    {...field}
-                    className="h-12 text-base text-gray-8"
-                  />
-                </FormControl>
-                <FormDescription>
-                  maximum number of chapters is 13
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <Raw className="justify-between">
+                    <FormLabel className="text-base text-gray-7">
+                      Title
+                    </FormLabel>
+                    <Raw gap="8px" className="items-center">
+                      <Switch
+                        checked={isDisable}
+                        onCheckedChange={() =>
+                          setIsDisable((disable) => !disable)
+                        }
+                      />
+                      <span className="text-sm font-medium text-gray-6">
+                        Leave it to AI
+                      </span>
+                    </Raw>
+                  </Raw>
+
+                  <FormControl>
+                    <Input
+                      placeholder="Title of the storybook"
+                      {...field}
+                      className="h-12 text-base text-gray-8"
+                      disabled={isDisable}
+                      value={
+                        isDisable ? "Leave AI generate title" : field.value
+                      }
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </Raw>
 
           <Button
             type="submit"
