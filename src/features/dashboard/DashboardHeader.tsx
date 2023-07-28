@@ -3,7 +3,7 @@
 import { Bell, Lightning } from "@phosphor-icons/react";
 import { Button } from "../../ui/button";
 import { Progress } from "../../ui/progress";
-import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
+import { Avatar, AvatarFallback } from "../../ui/avatar";
 import Navbar from "../../ui/Navbar";
 import Raw from "../../ui/Row";
 import { useQueryClient } from "react-query";
