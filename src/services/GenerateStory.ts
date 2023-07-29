@@ -3,7 +3,7 @@
 import supabase from "./supabase";
 
 export async function generate(prompt: string) {
-  const { data, error } = await supabase.functions.invoke("hello", {
+  const { data, error } = await supabase.functions.invoke("generateStory", {
     body: { prompt },
   });
 

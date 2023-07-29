@@ -21,6 +21,7 @@ function Generate() {
     { mutationKey: ["story"] },
   );
 
+  console.log(data);
   // const { data, isLoading: storyLoading } = useQuery({
   //   queryKey: ["story"],
   //   queryFn: () => axios("http://localhost:3000/story"),
@@ -34,7 +35,12 @@ function Generate() {
           <GenerateForm generate={generate} isLoading={isLoading} />
         </div>
         <div className="col-[8_/_span_17] rounded-xl bg-white p-4">
-          {isLoading ? "loading..." : <StoryViewer story={data.data} />}
+          {isLoading && "Loading..."}
+          {!data ? (
+            "Enter your story details and see the magic happened"
+          ) : (
+            <StoryViewer story={data.data} />
+          )}
           {/* <EbupReader /> */}
         </div>
       </div>
