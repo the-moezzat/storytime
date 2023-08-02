@@ -7,7 +7,7 @@ import axios from "axios";
 import { objectToQueryString } from "../../utils/helper";
 import StoryViewer from "./StoryViewer";
 
-const endpoint = "https://gpt-author-kx2ozxq4oa-uc.a.run.app/generate";
+const endpoint = "https://gpt-author.onrender.com/generate";
 
 function Generate() {
   const {
@@ -21,7 +21,7 @@ function Generate() {
     { mutationKey: ["story"] },
   );
 
-  console.log(data);
+  // console.log(data);
   // const { data, isLoading: storyLoading } = useQuery({
   //   queryKey: ["story"],
   //   queryFn: () => axios("http://localhost:3000/story"),
