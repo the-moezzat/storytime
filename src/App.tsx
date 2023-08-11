@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Generate from "./features/generate/Generate";
+import SignedRoute from "./ui/signedRoute";
 
 function App() {
   const queryClient = new QueryClient();
@@ -30,17 +31,18 @@ function App() {
                 </Button>
               }
             />
-
-            <Route path="registration" element={<Registration />}>
-              <Route index element={<Navigate replace to="login" />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<SignUp />} />
+            <Route element={<SignedRoute />}>
+              <Route path="registration" element={<Registration />}>
+                <Route index element={<Navigate replace to="login" />} />
+                <Route path="login" element={<Login />} />
+                <Route path="signup" element={<SignUp />} />
+              </Route>
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path="app" element={<AppLayout />}>
                 <Route index element={<Navigate replace to="dashboard" />} />
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="Home" element={<Home />} />
+                <Route path="home" element={<Home />} />
                 <Route path="create" element={<Generate />} />
               </Route>
             </Route>

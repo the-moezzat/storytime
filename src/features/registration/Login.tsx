@@ -39,14 +39,16 @@ const formSchema = z.object({
 export default function Login() {
   const navigate = useNavigate();
 
-  const { isLoading, mutate, error } = useMutation({
-    mutationKey: ["user"],
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
+  const { isLoading, mutate, error } = useMutation(
+    ({ email, password }: { email: string; password: string }) =>
       login({ email, password }),
-    onSuccess: () => {
-      navigate("/app");
+    {
+      mutationKey: ["user"],
+      onSuccess: () => {
+        navigate("/app");
+      },
     },
-  });
+  );
 
   async function handleGoogle() {
     console.log("google");
@@ -83,8 +85,6 @@ export default function Login() {
   ) => {
     if (isLoading) return;
     mutate({ email: values.email, password: values.password });
-
-    return;
   };
 
   return (
