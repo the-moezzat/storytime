@@ -1,16 +1,24 @@
 import { Outlet } from "react-router-dom";
 import DashboardHeader from "../features/dashboard/DashboardHeader";
 import { ScrollArea } from "../ui/scroll-area";
+import { styled } from "styled-components";
+
+const Main = styled(ScrollArea)`
+  height: calc(100vh - 64px);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  background-color: #eee;
+  padding: 16px;
+  overflow: auto;
+`;
 
 function AppLayout() {
   return (
-    <div className="container flex h-screen flex-col">
+    <div className="container">
       <DashboardHeader />
-      <ScrollArea className="h-full rounded-t-3xl bg-gray-0 py-4">
-        <div className="px-4">
-          <Outlet />
-        </div>
-      </ScrollArea>
+      <Main>
+        <Outlet />
+      </Main>
     </div>
   );
 }

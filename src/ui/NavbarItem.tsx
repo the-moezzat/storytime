@@ -14,7 +14,7 @@ const StyledNavLink = styled(NavLink)`
   padding: 0.25rem 1rem;
   gap: 0.5rem;
   color: #495057;
-  font-size: 18px;
+  font-size: 14px;
   &.active {
     background-color: #fff;
     color: #343a40;

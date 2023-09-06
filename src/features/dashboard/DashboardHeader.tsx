@@ -47,23 +47,26 @@ function DashboardHeader() {
 
   // const { firstName, lastName } = user.user_metadata;
   return (
-    <div className="flex items-center justify-between p-4">
-      <img src="/logo.svg" alt="logo" className="h-10" />
+    <div className="flex h-16 items-center justify-between p-4 py-2">
+      <img src="/logo.svg" alt="logo" className="h-8" />
       <Navbar />
       <Raw gap="18px">
-        <Raw gap="12px">
+        <Raw gap="18px">
           <Raw variant="vertical" gap="4px">
-            <p className="text-base text-gray-6">6 / 10 stories</p>
+            <p className="text-sm text-gray-6">6 / 10 stories</p>
             <Progress value={60} />
           </Raw>
-          <Button className="flex items-center gap-2 bg-blue-6 text-white hover:bg-blue-7">
+          <Button
+            size="sm"
+            className="flex items-center gap-2 bg-blue-6 text-white hover:bg-blue-7"
+          >
             <Lightning weight="fill" />
             Upgrade
           </Button>
         </Raw>
         <Raw gap="12px">
           <Button size={"icon"} variant={"ghost"}>
-            <Bell size={24} color="#343a40" />
+            <Bell size={20} color="#343a40" />
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger>

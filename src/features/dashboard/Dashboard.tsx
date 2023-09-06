@@ -1,34 +1,38 @@
-import { PlusCircle } from "@phosphor-icons/react";
+import { Plus } from "@phosphor-icons/react";
 import { Button } from "../../ui/button";
 import { Link } from "react-router-dom";
 import Book from "./Book";
 import { useQuery, useQueryClient } from "react-query";
 import { getStories } from "../../services/apiStories";
 import { ScrollArea } from "../../ui/scroll-area";
+import BookSkeleton from "./BookSkeleton";
 
 export default function Dashboard() {
-  const { id }: { id: string } = useQueryClient().getQueryData(["user"]);
+  const {
+    id,
+    user_metadata: { firstName },
+  }: { id: string; user_metadata: { firstName: string } } =
+    useQueryClient().getQueryData(["user"]);
 
   const { isLoading, data: stories } = useQuery("stories", () =>
     getStories(id),
   );
 
-  if (isLoading) return <div>Loading...</div>;
-
   return (
     <ScrollArea className="h-full">
       <div className="flex items-center justify-between gap-4">
-        <h1 className="mb-1 scroll-m-20 text-3xl font-bold tracking-tight text-gray-8 sm:mb-2 lg:text-4xl">
-          Storybooks
+        <h1 className="mb-1 scroll-m-20 text-xl font-bold text-gray-7 sm:mb-2 lg:text-2xl">
+          Welcome back, <span className="font-medium">{firstName}</span>
         </h1>
         <Link to={"/app/create"}>
-          <Button className="flex items-center gap-2 bg-blue-6  py-6 text-lg hover:bg-blue-7">
-            <PlusCircle size={22} weight="bold" />
-            Create new storybook
+          <Button className="flex items-center gap-2 bg-blue-6  py-5 hover:bg-blue-7">
+            <Plus size={18} weight="bold" />
+            Create storybook
           </Button>
         </Link>
       </div>
-      <main className="mt-6 grid grid-cols-3 gap-4">
+      <main className=" mt-6 grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        {isLoading && <BookSkeleton count={5} />}
         {stories &&
           stories.map((story) => <Book key={story.id} book={story} />)}
       </main>

@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import { objectToQueryString } from "../../utils/helper";
 import StoryViewer from "./StoryViewer";
+// import { ScrollArea } from "../../ui/scroll-area";
 
 const endpoint = "https://gpt-author.onrender.com/generate";
 
@@ -30,8 +31,8 @@ function Generate() {
 
   return (
     <>
-      <div className="grid h-full grid-cols-[repeat(24,1fr)] gap-4">
-        <div className="col-span-7 rounded-xl bg-white p-4">
+      <div className="grid grid-cols-[repeat(24,1fr)] gap-4 overflow-hidden ">
+        <div className=" col-span-7 overflow-auto rounded-xl bg-white p-4">
           <GenerateForm generate={generate} isLoading={isLoading} />
         </div>
         <div className="col-[8_/_span_17] rounded-xl bg-white p-4">
