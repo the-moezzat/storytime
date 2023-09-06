@@ -1,18 +1,18 @@
 import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import Registration from "./pages/Registration";
 import Login from "./features/registration/Login";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import SignUp from "./features/registration/SignUp";
 import AppLayout from "./pages/AppLayout";
 import Dashboard from "./features/dashboard/Dashboard";
 // import Create from "./features/dashboard/Create";
 import Home from "./features/dashboard/Home";
-import { Toaster } from "./ui/toaster";
+import { Toaster } from "@/components/ui/toaster";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import ProtectedRoute from "./ui/ProtectedRoute";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Generate from "./features/generate/Generate";
-import SignedRoute from "./ui/signedRoute";
+import SignedRoute from "./components/signedRoute";
 
 function App() {
   const queryClient = new QueryClient();

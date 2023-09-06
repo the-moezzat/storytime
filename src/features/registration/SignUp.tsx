@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 import {
   Form,
@@ -8,7 +8,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "../../ui/form";
+} from "@/components/ui/form";
 
 import { Envelope, Password } from "@phosphor-icons/react";
 
@@ -17,8 +17,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import RegistrationHeader from "./RegistrationHeader";
 import RegistrationFooter from "./RegistrationFooter";
-import { toast } from "../../ui/use-toast";
-import { signup } from "../../services/apiAuth";
+import { useToast } from "@/components/ui/use-toast";
+import { signup } from "@/services/apiAuth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -49,6 +49,7 @@ const formSchema = z
   });
 
 export default function SignUp() {
+  const { toast } = useToast();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

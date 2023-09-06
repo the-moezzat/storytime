@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 import {
   Form,
@@ -8,7 +8,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "../../ui/form";
+} from "@/components/ui/form";
 
 import { Envelope, Password } from "@phosphor-icons/react";
 
@@ -18,8 +18,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import RegistrationHeader from "./RegistrationHeader";
 import RegistrationFooter from "./RegistrationFooter";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "../../ui/use-toast";
-import { login, signInWithGoogle } from "../../services/apiAuth";
+import { useToast } from "@/components/ui/use-toast";
+import { login, signInWithGoogle } from "@/services/apiAuth";
 import { useMutation } from "react-query";
 
 const formSchema = z.object({
@@ -37,6 +37,8 @@ const formSchema = z.object({
 });
 
 export default function Login() {
+  const { toast } = useToast();
+
   const navigate = useNavigate();
 
   const { isLoading, mutate, error } = useMutation(

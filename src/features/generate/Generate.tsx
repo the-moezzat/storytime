@@ -4,7 +4,7 @@
 import GenerateForm from "./GenerateForm";
 import { useMutation } from "react-query";
 import axios from "axios";
-import { objectToQueryString } from "../../utils/helper";
+import { objectToQueryString } from "@/utils/helpers";
 import StoryViewer from "./StoryViewer";
 // import { ScrollArea } from "../../ui/scroll-area";
 
@@ -19,7 +19,12 @@ function Generate() {
   } = useMutation(
     (body: { prompt: string; writing_style: string; num_chapters: number }) =>
       axios.post(`${endpoint}?${objectToQueryString(body)}`),
-    { mutationKey: ["story"] },
+    {
+      mutationKey: ["story"],
+      onSuccess(data) {
+        console.log(data);
+      },
+    },
   );
 
   // console.log(data);

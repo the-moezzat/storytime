@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { ArrowLeft, Sparkle } from "@phosphor-icons/react";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import Raw from "../../ui/Row";
-import { Textarea } from "../../ui/textarea";
+import Raw from "@/components/Row";
+import { Textarea } from "@/components/ui/textarea";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "../../ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Form,
   FormControl,
@@ -16,19 +16,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../ui/form";
-import { Input } from "../../ui/input";
-import { Separator } from "../../ui/separator";
-import { RadioGroup, RadioGroupItem } from "../../ui/radio-group";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../ui/select";
+} from "@/components/ui/select";
 import { useState } from "react";
-import { Switch } from "../../ui/switch";
+import { Switch } from "@/components/ui/switch";
 
 const formSchema = z.object({
   description: z.string().min(60, {
@@ -52,6 +52,8 @@ const formSchema = z.object({
 });
 
 export default function Create() {
+  const { toast } = useToast();
+
   const [isDisable, setIsDisable] = useState(true);
 
   const form = useForm<z.infer<typeof formSchema>>({

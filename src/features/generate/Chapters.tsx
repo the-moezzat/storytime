@@ -1,6 +1,6 @@
 import { List } from "@phosphor-icons/react";
-import { Button } from "../../ui/button";
-import { Separator } from "../../ui/separator";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetClose,
@@ -8,7 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../../ui/sheet";
+} from "@/components/ui/sheet";
 
 export default function Chapters({
   chapters,

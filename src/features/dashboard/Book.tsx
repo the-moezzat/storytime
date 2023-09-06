@@ -1,8 +1,8 @@
 // import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import Raw from "../../ui/Row";
-import { Badge } from "../../ui/badge";
-import { Button } from "../../ui/button";
-import IBook from "../../types/IBook";
+import Raw from "@/components/Row";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import IBook from "@/types/IBook";
 
 function Book({ book }: { book: IBook }) {
   return (

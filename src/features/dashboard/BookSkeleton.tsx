@@ -1,5 +1,5 @@
-import Raw from "../../ui/Row";
-import { Skeleton } from "../../ui/skeleton";
+import Raw from "@/components/Row";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function BookSkeleton({ count }: { count: number }) {
   return Array.from({ length: count }).map(() => (

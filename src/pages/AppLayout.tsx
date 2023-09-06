@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import DashboardHeader from "../features/dashboard/DashboardHeader";
-import { ScrollArea } from "../ui/scroll-area";
+import DashboardHeader from "@/features/dashboard/DashboardHeader";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { styled } from "styled-components";
 
 const Main = styled(ScrollArea)`

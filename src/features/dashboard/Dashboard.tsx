@@ -1,10 +1,10 @@
 import { Plus } from "@phosphor-icons/react";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Book from "./Book";
 import { useQuery, useQueryClient } from "react-query";
-import { getStories } from "../../services/apiStories";
-import { ScrollArea } from "../../ui/scroll-area";
+import { getStories } from "@/services/apiStories";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import BookSkeleton from "./BookSkeleton";
 
 export default function Dashboard() {

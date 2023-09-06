@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import {
   Bell,
   Lightning,
@@ -18,13 +18,13 @@ import {
   User,
   GearSix,
 } from "@phosphor-icons/react";
-import { Button } from "../../ui/button";
-import { Progress } from "../../ui/progress";
-import { Avatar, AvatarFallback } from "../../ui/avatar";
-import Navbar from "../../ui/Navbar";
-import Raw from "../../ui/Row";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import Navbar from "@/components/Navbar";
+import Raw from "@/components/Row";
 import { useMutation, useQueryClient } from "react-query";
-import { logOut } from "../../services/apiAuth";
+import { logOut } from "@/services/apiAuth";
 import { useNavigate } from "react-router-dom";
 
 function DashboardHeader() {
