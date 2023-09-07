@@ -23,29 +23,24 @@ import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Navbar from "@/components/Navbar";
 import Raw from "@/components/Row";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { logOut } from "@/services/apiAuth";
 import { useNavigate } from "react-router-dom";
+import useUser from "@/hooks/useUser";
 
 function DashboardHeader() {
   const {
     user_metadata: { firstName, lastName },
-  }: { user_metadata: { firstName: string; lastName: string } } =
-    useQueryClient().getQueryData(["user"]);
+  } = useUser();
 
   const navigate = useNavigate();
 
-  const { mutate, error, data, isLoading } = useMutation(logOut, {
+  const { mutate } = useMutation(logOut, {
     onSuccess() {
       navigate("/registration");
     },
   });
 
-  console.log("Loading:", isLoading);
-  console.log("data:", data);
-  console.log("error:", error);
-
-  // const { firstName, lastName } = user.user_metadata;
   return (
     <div className="flex h-16 items-center justify-between p-4 py-2">
       <img src="/logo.svg" alt="logo" className="h-8" />

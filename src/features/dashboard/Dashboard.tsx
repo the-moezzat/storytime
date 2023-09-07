@@ -2,20 +2,23 @@ import { Plus } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Book from "./Book";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { getStories } from "@/services/apiStories";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import BookSkeleton from "./BookSkeleton";
+import useUser from "@/hooks/useUser";
 
 export default function Dashboard() {
   const {
     id,
     user_metadata: { firstName },
-  }: { id: string; user_metadata: { firstName: string } } =
-    useQueryClient().getQueryData(["user"]);
+  } = useUser();
 
   const { isLoading, data: stories } = useQuery("stories", () =>
     getStories(id),
+    {
+      staleTime: Infinity,
+    }
   );
 
   return (
