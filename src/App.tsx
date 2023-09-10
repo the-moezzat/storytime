@@ -1,6 +1,5 @@
 import { Suspense, lazy } from "react";
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from "@/components/ui/toaster";
@@ -16,6 +15,7 @@ const AppLayout = lazy(() => import("@/pages/AppLayout"));
 const Dashboard = lazy(() => import("@/features/dashboard/Dashboard"));
 const Home = lazy(() => import("@/features/dashboard/Home"));
 const Generate = lazy(() => import("@/features/generate/Generate"));
+const LandingPage = lazy(() => import("@/pages/landingPage"));
 
 function App() {
   const queryClient = new QueryClient();
@@ -27,14 +27,7 @@ function App() {
         <Suspense fallback={<Loading type="screen" size="large" />}>
           <BrowserRouter>
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <Button>
-                    <Link to={"registration/login"}>Login</Link>
-                  </Button>
-                }
-              />
+              <Route path="/" element={<LandingPage />} />
               <Route element={<SignedRoute />}>
                 <Route path="registration" element={<Registration />}>
                   <Route index element={<Navigate replace to="login" />} />
