@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   return (
-    <div className="flex items-center justify-between py-4">
+    <div className="z-50 flex items-center justify-between py-4">
       <Link to={"/"}>
         <img src="/logo-white.svg" alt="logo" className="h-6" />
       </Link>

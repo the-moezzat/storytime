@@ -53,7 +53,7 @@ export default function Hero() {
           alt="chat"
           className="absolute bottom-32 left-20 z-0 h-14 w-14 max-lg:h-10 max-lg:w-10 max-md:bottom-20 max-md:left-10 max-sm:left-5"
         />
-        <div className="absolute left-10 top-14 -z-10 h-80 w-80 rounded-full bg-gradient-to-r from-[#FF6FD8] to-[#3813C2] blur-[120px]"></div>
+        <div className="absolute left-0 top-0 -z-10 h-80 w-80 rounded-full bg-gradient-to-r from-[#FF6FD8] to-[#3813C2] blur-[120px] max-md:-left-20 max-md:-top-10"></div>
         <div className="absolute -bottom-28 -right-10 -z-10 h-60 w-60 rounded-full bg-gradient-to-r from-[#CA54DC] to-[#028340] blur-[120px]"></div>
       </header>
     </div>
