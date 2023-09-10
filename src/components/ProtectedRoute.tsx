@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getCurrentUser } from "../services/apiAuth";
-import { CircleNotch } from "@phosphor-icons/react";
+// import { CircleNotch } from "@phosphor-icons/react";
 
 function ProtectedRoute() {
   const { data, isLoading } = useQuery(["user"], getCurrentUser);
