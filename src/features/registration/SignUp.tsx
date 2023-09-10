@@ -19,8 +19,7 @@ import RegistrationHeader from "./RegistrationHeader";
 import RegistrationFooter from "./RegistrationFooter";
 import { useToast } from "@/components/ui/use-toast";
 import { signup } from "@/services/apiAuth";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "react-query";
 
 const formSchema = z
   .object({
@@ -62,30 +61,30 @@ export default function SignUp() {
     },
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate, isLoading } = useMutation(signup, {
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["user"] }).catch(() => {
+        console.log("error");
+      });
+    },
+    onError() {
+      toast({
+        title: "Uh oh! Something went wrong.",
+        variant: "destructive",
+      });
+    },
+  });
 
   // 2. Define a submit handler.
-  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async ({
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = ({
     firstName,
     lastName,
     email,
     password,
   }: z.infer<typeof formSchema>) => {
-    if (isLoading) return;
-    try {
-      setIsLoading(true);
-      // 2.1. Validate the form.
-      await signup({ firstName, lastName, email, password });
-      navigate("/app");
-    } catch (error) {
-      toast({
-        title: "You submitted the following values:",
-        description: "something went wrong",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    mutate({ firstName, lastName, email, password });
   };
 
   return (

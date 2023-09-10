@@ -60,74 +60,73 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
   );
 
   return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="">
-          <Raw variant="vertical" gap="12px" className="mb-4">
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base text-gray-7">
-                    Story details
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Type your message here."
-                      className="max-h-60 text-base text-gray-8"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="tone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base text-gray-7">
-                    Writing Style
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Type your message here."
-                      className="max-h-60 text-base text-gray-8"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="">
+        <Raw variant="vertical" gap="12px" className="mb-4">
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base text-gray-7">
+                  Story details
+                </FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Type your message here."
+                    className="max-h-60 text-base text-gray-8"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="tone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base text-gray-7">
+                  Writing Style
+                </FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Type your message here."
+                    className="max-h-60 text-base text-gray-8"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="numberOfChapters"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base text-gray-7">
-                    Number of chapters
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Number of chapters"
-                      type="number"
-                      {...field}
-                      className="h-12 text-base text-gray-8"
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    maximum number of chapters is 5
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="numberOfChapters"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base text-gray-7">
+                  Number of chapters
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Number of chapters"
+                    type="number"
+                    {...field}
+                    className="h-12 text-base text-gray-8"
+                  />
+                </FormControl>
+                <FormDescription>
+                  maximum number of chapters is 5
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            {/* <Raw variant="vertical" gap="12px" className="mb-4">
+          {/* <Raw variant="vertical" gap="12px" className="mb-4">
             <FormField
               control={form.control}
               name="pointOfView"
@@ -218,68 +217,63 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
             className="mx-auto mb-3 w-11/12"
           /> */}
 
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <Raw className="justify-between">
-                    <FormLabel className="text-base text-gray-7">
-                      Title
-                    </FormLabel>
-                    <Raw gap="8px" className="items-center">
-                      <Switch
-                        checked={isDisable}
-                        onCheckedChange={() =>
-                          setIsDisable((disable) => !disable)
-                        }
-                      />
-                      <span className="text-sm font-medium text-gray-6">
-                        Leave it to AI
-                      </span>
-                    </Raw>
-                  </Raw>
-
-                  <FormControl>
-                    <Input
-                      placeholder="Title of the storybook"
-                      {...field}
-                      className="h-12 text-base text-gray-8"
-                      disabled={isDisable}
-                      value={
-                        isDisable ? "Leave AI generate title" : field.value
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <Raw className="justify-between">
+                  <FormLabel className="text-base text-gray-7">Title</FormLabel>
+                  <Raw gap="8px" className="items-center">
+                    <Switch
+                      checked={isDisable}
+                      onCheckedChange={() =>
+                        setIsDisable((disable) => !disable)
                       }
                     />
-                  </FormControl>
+                    <span className="text-sm font-medium text-gray-6">
+                      Leave it to AI
+                    </span>
+                  </Raw>
+                </Raw>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </Raw>
+                <FormControl>
+                  <Input
+                    placeholder="Title of the storybook"
+                    {...field}
+                    className="h-12 text-base text-gray-8"
+                    disabled={isDisable}
+                    value={isDisable ? "Leave AI generate title" : field.value}
+                  />
+                </FormControl>
 
-          <Button
-            type="submit"
-            className="mt-auto w-full space-x-3 px-6 py-6 text-lg"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <div className=" animate-spin">
-                  <CircleNotch weight="fill" />
-                </div>
-                <span> Generating </span>
-              </>
-            ) : (
-              <>
-                <Sparkle weight="fill" />
-                <span> Generate </span>
-              </>
+                <FormMessage />
+              </FormItem>
             )}
-          </Button>
-        </form>
-      </Form>
-    </div>
+          />
+        </Raw>
+
+        <Button
+          type="submit"
+          className="mt-auto w-full space-x-3 px-6 py-6 text-lg"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <div className=" animate-spin">
+                <CircleNotch weight="fill" />
+              </div>
+              <span> Generating </span>
+            </>
+          ) : (
+            <>
+              <Sparkle weight="fill" />
+              <span> Generate </span>
+            </>
+          )}
+        </Button>
+      </form>
+    </Form>
   );
 }
 

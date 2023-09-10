@@ -23,21 +23,21 @@ import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Navbar from "@/components/Navbar";
 import Raw from "@/components/Row";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { logOut } from "@/services/apiAuth";
-import { useNavigate } from "react-router-dom";
 import useUser from "@/hooks/useUser";
 
 function DashboardHeader() {
   const {
     user_metadata: { firstName, lastName },
   } = useUser();
-
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate } = useMutation(logOut, {
     onSuccess() {
-      navigate("/registration");
+      queryClient.invalidateQueries({ queryKey: ["user"] }).catch(() => {
+        console.log("error");
+      });
     },
   });
 

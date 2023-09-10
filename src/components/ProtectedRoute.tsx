@@ -1,10 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getCurrentUser } from "../services/apiAuth";
+// import { useQuery } from "react-query";
+// import { getCurrentUser } from "../services/apiAuth";
+import useUser from "@/hooks/useUser";
 // import { CircleNotch } from "@phosphor-icons/react";
 
 function ProtectedRoute() {
-  const { data, isLoading } = useQuery(["user"], getCurrentUser);
+  const data = useUser();
+  console.log(data);
+  // data = useQuery(["user"], getCurrentUser);
 
   return (
     <>
@@ -18,7 +21,7 @@ function ProtectedRoute() {
 
       {data && <Outlet />}
 
-      {!data && !isLoading && <Navigate to={"/registration"} />}
+      {!data && <Navigate to={"/registration"} />}
     </>
   );
 }

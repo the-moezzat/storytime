@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import Book from "./Book";
 import { useQuery } from "react-query";
 import { getStories } from "@/services/apiStories";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import BookSkeleton from "./BookSkeleton";
 import useUser from "@/hooks/useUser";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Dashboard() {
   const {
@@ -14,15 +14,16 @@ export default function Dashboard() {
     user_metadata: { firstName },
   } = useUser();
 
-  const { isLoading, data: stories } = useQuery("stories", () =>
-    getStories(id),
+  const { isLoading, data: stories } = useQuery(
+    "stories",
+    () => getStories(id),
     {
       staleTime: Infinity,
-    }
+    },
   );
 
   return (
-    <ScrollArea className="h-full">
+    <ScrollArea className="col-span-full">
       <div className="flex items-center justify-between gap-4">
         <h1 className="mb-1 scroll-m-20 text-xl font-bold text-gray-7 sm:mb-2 lg:text-2xl">
           Welcome back, <span className="font-medium">{firstName}</span>

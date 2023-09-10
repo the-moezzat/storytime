@@ -1,12 +1,14 @@
 import { Suspense, lazy } from "react";
+// import { ReactQueryDevtools } from "react-query/types/devtools/devtools";
+
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from "@/components/ui/toaster";
 
 import ProtectedRoute from "@/components/ProtectedRoute";
 import SignedRoute from "./components/signedRoute";
 import Loading from "./components/Loading";
+import { useQuery } from "react-query";
+import { getCurrentUser } from "./services/apiAuth";
 
 const Registration = lazy(() => import("@/pages/Registration"));
 const Login = lazy(() => import("@/features/registration/Login"));
@@ -18,36 +20,37 @@ const Generate = lazy(() => import("@/features/generate/Generate"));
 const LandingPage = lazy(() => import("@/pages/landingPage"));
 
 function App() {
-  const queryClient = new QueryClient();
+  const { data } = useQuery(["user"], getCurrentUser, {
+    staleTime: Infinity,
+  });
 
+  console.log(data);
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <Suspense fallback={<Loading type="screen" size="large" />}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route element={<SignedRoute />}>
-                <Route path="registration" element={<Registration />}>
-                  <Route index element={<Navigate replace to="login" />} />
-                  <Route path="login" element={<Login />} />
-                  <Route path="signup" element={<SignUp />} />
-                </Route>
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <Suspense fallback={<Loading type="screen" size="large" />}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route element={<SignedRoute />}>
+              <Route path="registration" element={<Registration />}>
+                <Route index element={<Navigate replace to="login" />} />
+                <Route path="login" element={<Login />} />
+                <Route path="signup" element={<SignUp />} />
               </Route>
-              <Route element={<ProtectedRoute />}>
-                <Route path="app" element={<AppLayout />}>
-                  <Route index element={<Navigate replace to="dashboard" />} />
-                  <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="home" element={<Home />} />
-                  <Route path="create" element={<Generate />} />
-                </Route>
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="app" element={<AppLayout />}>
+                <Route index element={<Navigate replace to="dashboard" />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="home" element={<Home />} />
+                <Route path="create" element={<Generate />} />
               </Route>
-            </Routes>
-          </BrowserRouter>
-        </Suspense>
-        <Toaster />
-      </QueryClientProvider>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Suspense>
+      <Toaster />
     </>
   );
 }

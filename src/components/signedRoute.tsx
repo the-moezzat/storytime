@@ -1,10 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getCurrentUser } from "../services/apiAuth";
+// import { useQuery } from "react-query";
+// import { getCurrentUser } from "../services/apiAuth";
+import useUser from "@/hooks/useUser";
 // import { CircleNotch } from "@phosphor-icons/react";
 
 function SignedRoute() {
-  const { data } = useQuery(["user"], getCurrentUser);
+  // const { data } = useQuery(["user"], getCurrentUser);
+  const data = useUser();
 
   // if (isLoading)
   //   return (

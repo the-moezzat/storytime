@@ -17,10 +17,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import RegistrationHeader from "./RegistrationHeader";
 import RegistrationFooter from "./RegistrationFooter";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { login, signInWithGoogle } from "@/services/apiAuth";
-import { useMutation } from "react-query";
+import { login } from "@/services/apiAuth";
+import { useMutation, useQueryClient } from "react-query";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -39,35 +39,31 @@ const formSchema = z.object({
 export default function Login() {
   const { toast } = useToast();
 
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const { isLoading, mutate, error } = useMutation(
-    ({ email, password }: { email: string; password: string }) =>
-      login({ email, password }),
-    {
-      mutationKey: ["user"],
-      onSuccess: () => {
-        navigate("/app");
-      },
+  const { isLoading, mutate } = useMutation(login, {
+    mutationKey: ["user"],
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] }).catch(() => {
+        console.log("error");
+      });
     },
-  );
+    onError() {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "password or email incorrect",
+      });
+    },
+  });
 
-  async function handleGoogle() {
-    console.log("google");
-    const data = await signInWithGoogle();
+  // async function handleGoogle() {
+  //   console.log("google");
+  //   const data = await signInWithGoogle();
 
-    console.log(data);
-  }
+  //   console.log(data);
+  // }
 
-  if (error) {
-    toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
-      description: "password or email incorrect",
-    });
-  }
-
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -76,12 +72,6 @@ export default function Login() {
     },
   });
 
-  // const navigate = useNavigate();
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  // void getUser();
-
-  // 2. Define a submit handler.
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
     values: z.infer<typeof formSchema>,
   ) => {
@@ -157,14 +147,14 @@ export default function Login() {
           </Button>
         </form>
       </Form>
-      <Button
+      {/* <Button
         variant={"outline"}
         className="h-14 w-full text-base text-gray-8"
         onClick={handleGoogle}
       >
         <img src="/google-logo.svg" alt="logo" className="mr-2 h-9 w-9" />
         Login with google
-      </Button>
+      </Button> */}
       <RegistrationFooter
         text="New to storytime?"
         linkText="Sign up for free"
