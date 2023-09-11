@@ -133,7 +133,7 @@ export default function Login() {
             )}
           />
           <Link
-            className="mb-4 inline-block p-0 text-blue-4 hover:underline"
+            className="mb-4 inline-block p-0 text-accent hover:underline"
             to={""}
           >
             Forget password?
@@ -141,7 +141,7 @@ export default function Login() {
           <Button
             type="submit"
             disabled={isLoading}
-            className="mb-2 h-14 w-full bg-blue-6 text-base transition-all hover:bg-blue-7"
+            className="mb-2 h-14 w-full bg-primary text-base text-[#171625] transition-all hover:bg-primary/80 "
           >
             Continue
           </Button>

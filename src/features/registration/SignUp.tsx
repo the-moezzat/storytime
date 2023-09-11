@@ -209,13 +209,13 @@ export default function SignUp() {
           </Button>
         </form>
       </Form>
-      <Button
+      {/* <Button
         variant={"outline"}
         className="text-gray-700 mt-1 h-14 w-full text-base sm:mt-2"
       >
         <img src="/google-logo.svg" alt="logo" className="mr-2 h-9 w-9" />
         Sign up with google
-      </Button>
+      </Button> */}
       <RegistrationFooter
         text="Already have an account?"
         linkText="Login now"
