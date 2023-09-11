@@ -19,6 +19,12 @@ const StyledNavLink = styled(NavLink)`
     background-color: #fff;
     color: #343a40;
   }
+
+  @media (max-width: 1024px) {
+    font-size: 12px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
 `;
 function NavbarItem({ icon, title, to }: INavbarItem) {
   return (

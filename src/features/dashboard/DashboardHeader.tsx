@@ -42,14 +42,14 @@ function DashboardHeader() {
   });
 
   return (
-    <div className="flex h-16 items-center justify-between p-4 py-2">
-      <img src="/logo.svg" alt="logo" className="h-8" />
+    <div className="flex h-16 items-center justify-between p-4 py-2 max-lg:h-14 max-lg:p-2 max-md:h-12">
+      <img src="/logo-black.svg" alt="logo" className="h-6 max-md:h-5" />
       <Navbar />
-      <Raw gap="18px">
-        <Raw gap="18px">
+      <div className="flex items-center gap-5 max-lg:gap-3">
+        <div className="flex items-center gap-5 max-lg:gap-3">
           <Raw variant="vertical" gap="4px">
-            <p className="text-sm text-gray-6">6 / 10 stories</p>
-            <Progress value={60} />
+            <p className="text-sm text-gray-6 max-lg:text-xs">6 / 10 stories</p>
+            <Progress value={60} className="h-1.5" />
           </Raw>
           <Button
             size="sm"
@@ -58,10 +58,10 @@ function DashboardHeader() {
             <Lightning weight="fill" />
             Upgrade
           </Button>
-        </Raw>
-        <Raw gap="12px">
-          <Button size={"icon"} variant={"ghost"}>
-            <Bell size={20} color="#343a40" />
+        </div>
+        <div className="flex items-center gap-3 max-lg:gap-2">
+          <Button size={"icon"} variant={"ghost"} className="text-xl">
+            <Bell color="#343a40" />
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -109,8 +109,8 @@ function DashboardHeader() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </Raw>
-      </Raw>
+        </div>
+      </div>
     </div>
   );
 }
