@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 // import EbupReader from "./EbupReader";
@@ -8,11 +9,21 @@ import { objectToQueryString } from "@/utils/helpers";
 import StoryViewer from "./StoryViewer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Loading from "@/components/Loading";
-// import { ScrollArea } from "../../ui/scroll-area";
+import { addStory } from "@/services/apiStories";
+import useUser from "@/hooks/useUser";
 
 const endpoint = "https://gpt-author.onrender.com/generate";
 
 function Generate() {
+  const { id } = useUser();
+
+  const { mutate } = useMutation({
+    mutationFn: addStory,
+    onSuccess(data) {
+      console.log(data);
+    },
+  });
+
   const {
     mutate: generate,
     data,
@@ -24,16 +35,45 @@ function Generate() {
     {
       mutationKey: ["story"],
       onSuccess(data) {
-        console.log(data);
+        console.log(data.data);
+        mutate({
+          title: data.data.title as string,
+          numberOfChapters: data.data.chapter_titles.length,
+          user_id: id,
+          chapters: data.data.chapter_titles.map(
+            (chapter: { [key: string]: string }) => {
+              return {
+                title: Object.keys(chapter)[0].split("-")[1],
+                content: Object.values(chapter)[0],
+              };
+            },
+          ),
+        });
       },
     },
   );
 
   // console.log(data);
-  // const { data, isLoading: storyLoading } = useQuery({
+  // const { isLoading: loading } = useQuery({
   //   queryKey: ["story"],
   //   queryFn: () => axios("http://localhost:3000/story"),
-  //   staleTime: 0,
+  //   staleTime: Infinity,
+  //   onSuccess: (data) => {
+  //     // console.log(data.data);
+  //     // console.log({
+  //     //   title: data.data.title as string,
+  //     //   numberOfChapters: data.data.chapter_titles.length,
+  //     //   user_id: id,
+  //     //   chapters: data.data.chapter_titles.map(
+  //     //     (chapter: { [key: string]: string }) => {
+  //     //       return {
+  //     //         title: Object.keys(chapter)[0].split("-")[1],
+  //     //         content: Object.values(chapter)[0],
+  //     //       };
+  //     //     },
+  //     //   ),
+  //     // });
+  //   },
   // });
 
   return (
@@ -41,9 +81,9 @@ function Generate() {
       <ScrollArea className="col-span-7 h-full overflow-auto rounded-xl bg-white p-4">
         <GenerateForm generate={generate} isLoading={isLoading} />
       </ScrollArea>
-      <div className="col-[8_/_span_17] rounded-xl bg-white p-4">
+      <div className="col-[8_/_span_17] overflow-auto rounded-xl bg-white p-4">
         {isLoading && (
-          <div className="flex h-full flex-col items-center justify-center gap-6">
+          <div className="flex h-full flex-col items-center justify-center gap-6 ">
             <Loading type="self" size="large" className="text-[#12EDE8]" />
             <h2 className="mb-3 text-center text-xl font-bold text-[#161D25]">
               Tighten Your Seatbelt: Your AI-Aeroplane is in Flight!

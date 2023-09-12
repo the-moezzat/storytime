@@ -1,3 +1,4 @@
+import IBook from "@/types/IBook";
 import supabase from "./supabase";
 
 export async function getStories(id: string) {
@@ -12,4 +13,15 @@ export async function getStories(id: string) {
   }
 
   return stories;
+}
+
+export async function addStory(story: IBook) {
+  const { data, error } = await supabase.from("stories").insert(story).select();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Can't add your story");
+  }
+
+  return data;
 }

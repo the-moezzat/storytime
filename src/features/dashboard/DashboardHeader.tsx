@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   Bell,
-  Lightning,
   CreditCard,
+  GearSix,
   Lifebuoy,
+  Lightning,
   SignOut,
   User,
-  GearSix,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -47,21 +47,22 @@ function DashboardHeader() {
       <Navbar />
       <div className="flex items-center gap-5 max-lg:gap-3">
         <div className="flex items-center gap-5 max-lg:gap-3">
-          <Raw variant="vertical" gap="4px">
-            <p className="text-sm text-gray-6 max-lg:text-xs">6 / 10 stories</p>
-            <Progress value={60} className="h-1.5" />
-          </Raw>
           <Button
             size="sm"
-            className="flex items-center gap-2 bg-blue-6 text-white hover:bg-blue-7"
+            variant={"outline"}
+            className="flex items-center gap-2 "
           >
             <Lightning weight="fill" />
             Upgrade
           </Button>
+          <Raw variant="vertical" gap="4px">
+            <p className="text-sm text-gray-6 max-lg:text-xs">6 / 10 stories</p>
+            <Progress value={60} className="h-1.5" />
+          </Raw>
         </div>
         <div className="flex items-center gap-3 max-lg:gap-2">
-          <Button size={"icon"} variant={"ghost"} className="text-xl">
-            <Bell color="#343a40" />
+          <Button size={"icon"} variant={"ghost"} className="hover: text-xl">
+            <Bell />
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger>

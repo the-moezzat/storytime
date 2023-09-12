@@ -22,20 +22,22 @@ export default function Dashboard() {
     },
   );
 
+  console.log(stories);
+
   return (
     <ScrollArea className="col-span-full">
       <div className="flex items-center justify-between gap-4">
-        <h1 className="mb-1 scroll-m-20 text-xl font-bold text-gray-7 sm:mb-2 lg:text-2xl">
+        <h1 className="mb-1 scroll-m-20 text-xl font-bold text-gray-8 sm:mb-2 lg:text-2xl">
           Welcome back, <span className="font-medium">{firstName}</span>
         </h1>
         <Link to={"/app/create"}>
-          <Button className="flex items-center gap-2 bg-blue-6  py-5 hover:bg-blue-7">
+          <Button className="flex items-center gap-2  py-5">
             <Plus size={18} weight="bold" />
             Create storybook
           </Button>
         </Link>
       </div>
-      <main className=" mt-6 grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
+      <main className=" mt-6 grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-lg:gap-2 max-sm:grid-cols-1">
         {isLoading && <BookSkeleton count={5} />}
         {stories &&
           stories.map((story) => <Book key={story.id} book={story} />)}

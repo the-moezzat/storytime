@@ -203,7 +203,7 @@ export default function SignUp() {
           <Button
             type="submit"
             disabled={isLoading}
-            className="mt-2 h-14 w-full bg-blue-6 text-base transition-all hover:bg-blue-7"
+            className="mt-2 h-14 w-full bg-primary text-base transition-all hover:bg-primary-5 hover:text-secondary-5"
           >
             Create account
           </Button>

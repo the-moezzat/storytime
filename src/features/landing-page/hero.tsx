@@ -36,7 +36,7 @@ export default function Hero() {
           <Link to={"registration/signup"}>
             <Button
               size={"lg"}
-              className=" h-12 w-44 rounded-lg bg-gradient-to-r from-blue-5 to-blue-4 p-4 shadow-lg max-md:h-9 max-md:w-32"
+              className=" h-12 w-44 rounded-lg bg-gradient-to-b from-primary-6 to-primary-4 p-4 shadow-lg transition-all hover:bg-gradient-to-br max-md:h-9 max-md:w-32"
             >
               Get started
             </Button>

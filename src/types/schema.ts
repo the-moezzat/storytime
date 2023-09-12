@@ -13,6 +13,7 @@ export interface Database {
         Row: {
           badges: string[] | null;
           bookUrl: string | null;
+          chapters: Json | null;
           created_at: string | null;
           downloadLink: string | null;
           id: number;
@@ -24,6 +25,7 @@ export interface Database {
         Insert: {
           badges?: string[] | null;
           bookUrl?: string | null;
+          chapters?: Json | null;
           created_at?: string | null;
           downloadLink?: string | null;
           id?: number;
@@ -35,6 +37,7 @@ export interface Database {
         Update: {
           badges?: string[] | null;
           bookUrl?: string | null;
+          chapters?: Json | null;
           created_at?: string | null;
           downloadLink?: string | null;
           id?: number;
