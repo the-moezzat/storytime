@@ -18,15 +18,15 @@ function StoryViewer({ story }: { story: Storybook }) {
   }
 
   return (
-    <div className="font-serif">
-      <header className="mb-6 flex items-center">
+    <div className="font-serif relative">
+      <header className="sticky top-0 mb-2 flex items-center bg-white  px-4 pb-2 pt-4">
         <Chapters
           chapters={chapterTitles}
           onChangeChapter={handleChangeChapter}
         />
         <h2 className="w-full text-center text-gray-5">{title}</h2>
       </header>
-      <div>
+      <div className="p-4">
         <h3 className="mb-4 text-xl font-bold text-gray-8">
           {chapterTitles[currentChapter]}
         </h3>

@@ -4,7 +4,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "./sheetNav";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 

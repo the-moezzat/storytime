@@ -24,6 +24,7 @@ import { Switch } from "@/components/ui/switch";
 import useGenerateForm from "./useGenerateForm";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
+import useProfile from "@/hooks/useProfile";
 
 interface GenerateFormProp {
   generate: UseMutateFunction<
@@ -42,6 +43,8 @@ interface GenerateFormProp {
 function GenerateForm({ generate, isLoading }: GenerateFormProp) {
   const [isDisable, setIsDisable] = useState(true);
 
+  const { profile } = useProfile();
+
   const { form, onSubmit } = useGenerateForm(
     {
       description:
@@ -51,11 +54,12 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
       title: isDisable ? "Leave AI generate title" : "",
     },
     (values) => {
-      generate({
-        prompt: values.description,
-        writing_style: values.tone,
-        num_chapters: Number(values.numberOfChapters),
-      });
+      if (profile?.credit !== profile?.used_credit)
+        generate({
+          prompt: values.description,
+          writing_style: values.tone,
+          num_chapters: Number(values.numberOfChapters),
+        });
     },
   );
 
@@ -256,21 +260,16 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
         <Button
           type="submit"
           className="mt-auto w-full space-x-3 px-6 py-6 text-lg"
-          disabled={isLoading}
+          disabled={profile?.used_credit === profile?.credit || isLoading}
         >
           {isLoading ? (
-            <>
-              <div className=" animate-spin">
-                <CircleNotch weight="fill" />
-              </div>
-              <span> Generating </span>
-            </>
+            <div className=" animate-spin">
+              <CircleNotch weight="fill" />
+            </div>
           ) : (
-            <>
-              <Sparkle weight="fill" />
-              <span> Generate </span>
-            </>
+            <Sparkle weight="fill" />
           )}
+          <span> Generate </span>
         </Button>
       </form>
     </Form>
