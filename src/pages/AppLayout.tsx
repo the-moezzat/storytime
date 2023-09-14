@@ -1,8 +1,10 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import DashboardHeader from "@/features/dashboard/DashboardHeader";
 import { styled } from "styled-components";
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
+import { useQuery } from "react-query";
+import { getCurrentUser } from "@/services/apiAuth";
 
 const Main = styled.div`
   height: calc(100vh - 64px);
@@ -33,19 +35,35 @@ const Main = styled.div`
 `;
 
 function AppLayout() {
+  const navigate = useNavigate();
+
+  const { isLoading } = useQuery(["user"], {
+    queryFn: getCurrentUser,
+    staleTime: Infinity,
+    onSuccess: (data) => {
+      console.log(data);
+      if (!data) navigate("/registration");
+    },
+    onError: () => {
+      navigate("/registration");
+    },
+  });
+
   return (
-    <div className="mx-auto max-w-[1440px] px-4 max-lg:px-2">
-      <DashboardHeader />
-      <Main>
-        <Suspense
-          fallback={
-            <Loading size="large" type="full" className={"col-span-full"} />
-          }
-        >
-          <Outlet />
-        </Suspense>
-      </Main>
-    </div>
+    isLoading || (
+      <div className="mx-auto max-w-[1440px] px-4 max-lg:px-2">
+        <DashboardHeader />
+        <Main>
+          <Suspense
+            fallback={
+              <Loading size="large" type="full" className={"col-span-full"} />
+            }
+          >
+            <Outlet />
+          </Suspense>
+        </Main>
+      </div>
+    )
   );
 }
 

@@ -25,13 +25,12 @@ import Navbar from "@/components/Navbar";
 import Raw from "@/components/Row";
 import { useMutation, useQueryClient } from "react-query";
 import { logOut } from "@/services/apiAuth";
-import useUser from "@/hooks/useUser";
+import useProfile from "@/hooks/useProfile";
 
 function DashboardHeader() {
-  const {
-    user_metadata: { firstName, lastName },
-  } = useUser();
   const queryClient = useQueryClient();
+
+  const { profile } = useProfile();
 
   const { mutate } = useMutation(logOut, {
     onSuccess() {
@@ -56,8 +55,17 @@ function DashboardHeader() {
             Upgrade
           </Button>
           <Raw variant="vertical" gap="4px">
-            <p className="text-sm text-gray-6 max-lg:text-xs">6 / 10 stories</p>
-            <Progress value={60} className="h-1.5" />
+            <p className="text-sm text-gray-6 max-lg:text-xs">
+              {profile?.used_credit} / {profile?.credit} stories
+            </p>
+            <Progress
+              value={
+                ((profile?.used_credit as number) /
+                  (profile?.credit as number)) *
+                100
+              }
+              className="h-1.5"
+            />
           </Raw>
         </div>
         <div className="flex items-center gap-3 max-lg:gap-2">
@@ -69,14 +77,14 @@ function DashboardHeader() {
               <Avatar>
                 {/* <AvatarImage src="" /> */}
                 <AvatarFallback>
-                  {firstName[0]}
-                  {lastName[0]}
+                  {profile?.first_name?.[0]}
+                  {profile?.last_name?.[0]}
                 </AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mr-3 w-56">
               <DropdownMenuLabel className="text-base text-gray-7">
-                {firstName} {lastName}
+                {profile?.first_name} {profile?.last_name}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>

@@ -27,6 +27,20 @@ export async function signup({
 
   if (error) throw new Error(error.message);
 
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .upsert([
+      {
+        updated_at: new Date().toISOString(),
+        id: data.user?.id as string,
+        first_name: firstName,
+        last_name: lastName,
+      },
+    ])
+    .select();
+
+  if (profileError) console.error(profileError);
+
   return data;
 }
 

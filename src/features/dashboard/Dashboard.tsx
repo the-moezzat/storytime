@@ -22,13 +22,11 @@ export default function Dashboard() {
     },
   );
 
-  console.log(stories);
-
   return (
     <ScrollArea className="col-span-full">
       <div className="flex items-center justify-between gap-4">
         <h1 className="mb-1 scroll-m-20 text-xl font-bold text-gray-8 sm:mb-2 lg:text-2xl">
-          Welcome back, <span className="font-medium">{firstName}</span>
+          Welcome, <span className="font-medium">{firstName}</span>
         </h1>
         <Link to={"/app/create"}>
           <Button className="flex items-center gap-2  py-5">

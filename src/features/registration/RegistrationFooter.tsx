@@ -11,7 +11,7 @@ function RegistrationFooter({ text, linkText, to }: RegistrationFooterProps) {
     <>
       <p className="mt-2 space-x-2 text-center text-gray-7">
         <span>{text}</span>
-        <Link to={to} className="p-0 text-secondary hover:underline">
+        <Link to={to} className="p-0 text-tertiary-7 hover:underline">
           {linkText}
         </Link>
       </p>
