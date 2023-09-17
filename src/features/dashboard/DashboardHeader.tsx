@@ -26,6 +26,7 @@ import Raw from "@/components/Row";
 import { useMutation, useQueryClient } from "react-query";
 import { logOut } from "@/services/apiAuth";
 import useProfile from "@/hooks/useProfile";
+import { Link } from "react-router-dom";
 
 function DashboardHeader() {
   const queryClient = useQueryClient();
@@ -42,7 +43,9 @@ function DashboardHeader() {
 
   return (
     <div className="flex h-16 items-center justify-between p-4 py-2 max-lg:h-14 max-lg:p-2 max-md:h-12">
-      <img src="/logo-black.svg" alt="logo" className="h-6 max-md:h-5" />
+      <Link to="/app/dashboard">
+        <img src="/logo-black.svg" alt="logo" className="h-6 max-md:h-5" />
+      </Link>
       <Navbar />
       <div className="flex items-center gap-5 max-lg:gap-3">
         <div className="flex items-center gap-5 max-lg:gap-3">
