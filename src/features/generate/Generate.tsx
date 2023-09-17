@@ -14,7 +14,7 @@ import useUser from "@/hooks/useUser";
 import useProfile from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
 
-const endpoint = "https://gpt-author.onrender.com/generate";
+const endpoint = import.meta.env["VITE_API_URL"] as string;
 
 function Generate() {
   const { id } = useUser();
