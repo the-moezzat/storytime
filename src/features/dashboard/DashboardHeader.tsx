@@ -27,6 +27,12 @@ import { useMutation, useQueryClient } from "react-query";
 import { logOut } from "@/services/apiAuth";
 import useProfile from "@/hooks/useProfile";
 import { Link } from "react-router-dom";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 function DashboardHeader() {
   const queryClient = useQueryClient();
@@ -44,8 +50,25 @@ function DashboardHeader() {
   return (
     <div className="flex h-16 items-center justify-between p-4 py-2 max-lg:h-14 max-lg:p-2 max-md:h-12 max-sm:h-10">
       <div className="flex items-center gap-3">
-        <div className="text-base sm:hidden">
-          <List />
+        <div className="sm:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="text-xl">
+                <List weight="regular" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="top"
+              className="flex flex-col items-center gap-2"
+            >
+              <SheetClose asChild>
+                <Link to={"/app/home"}>Home</Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link to={"/app/dashboard"}>Library</Link>
+              </SheetClose>
+            </SheetContent>
+          </Sheet>
         </div>
         <Link to="/app/dashboard">
           <img

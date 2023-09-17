@@ -14,6 +14,7 @@ import useUser from "@/hooks/useUser";
 import useProfile from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
 import InfoScreen from "@/components/infoScreen";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 
 const endpoint = import.meta.env["VITE_API_URL"] as string;
 
@@ -89,9 +90,21 @@ function Generate() {
           <GenerateForm generate={generate} isLoading={isLoading} />
         </div>
       </ScrollArea>
+      <div className="fixed bottom-0 right-0 z-50 w-full  border-t bg-white p-2 md:hidden">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="default" className="w-full text-base">
+              {isLoading ? "Generating" : "Generate"}
+            </Button>
+          </SheetTrigger>
+          <SheetContent side={"bottom"} className="h-auto max-h-[95%]">
+            <GenerateForm generate={generate} isLoading={isLoading} />
+          </SheetContent>
+        </Sheet>
+      </div>
       {/* <ScrollArea className="col-[8_/_span_17]  rounded-xl bg-white "> */}
       <div className="col-[8_/_span_17] h-full  overflow-x-auto rounded-xl bg-white max-lg:col-[9_/_span_16] max-md:col-span-full">
-        {profile?.used_credit !== profile?.credit && !data && (
+        {profile?.used_credit === profile?.credit && !data && (
           <InfoScreen>
             <InfoScreen.Image
               src="/warning.svg"
@@ -108,7 +121,7 @@ function Generate() {
             </InfoScreen.actions>
           </InfoScreen>
         )}
-        {!isLoading && (
+        {isLoading && (
           <InfoScreen>
             <Loading type="self" size="large" className="mb-3 text-primary" />
             <InfoScreen.Title>

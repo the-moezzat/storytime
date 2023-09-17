@@ -7,6 +7,7 @@ import { getStories } from "@/services/apiStories";
 import BookSkeleton from "./BookSkeleton";
 import useUser from "@/hooks/useUser";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import InfoScreen from "@/components/infoScreen";
 
 export default function Dashboard() {
   const {
@@ -37,6 +38,32 @@ export default function Dashboard() {
       </div>
       <main className=" mt-6 grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-lg:gap-2 max-sm:grid-cols-1">
         {isLoading && <BookSkeleton count={5} />}
+        {stories && stories.length === 0 && (
+          <div className=" col-span-full">
+            <InfoScreen>
+              <InfoScreen.Image
+                src="/no-stories.svg"
+                alt="empty"
+                className="h-56 max-md:h-44 max-sm:h-36"
+              />
+              <InfoScreen.Title>
+                You don't have any stories yet. Start one now!
+              </InfoScreen.Title>
+              <InfoScreen.actions className=" space-x-2">
+                <Link to={"/app/create"}>
+                  <Button variant={"default"} size={"sm"}>
+                    Start imagination
+                  </Button>
+                </Link>
+                <Link to={"/app/home"}>
+                  <Button variant={"outline"} size={"sm"}>
+                    Explore community
+                  </Button>
+                </Link>
+              </InfoScreen.actions>
+            </InfoScreen>
+          </div>
+        )}
         {stories &&
           stories.map((story) => <Book key={story.id} book={story} />)}
       </main>

@@ -72,13 +72,13 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-base text-gray-7">
+                <FormLabel className="text-base text-gray-7 max-md:text-sm max-sm:text-xs">
                   Story details
                 </FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Type your message here."
-                    className="max-h-60 text-base text-gray-8"
+                    className="max-h-60 text-base text-gray-8 max-md:text-sm"
                     {...field}
                   />
                 </FormControl>
@@ -86,18 +86,19 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="tone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-base text-gray-7">
+                <FormLabel className="text-base text-gray-7 max-md:text-sm max-sm:text-xs">
                   Writing Style
                 </FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Type your message here."
-                    className="max-h-60 text-base text-gray-8"
+                    className="max-h-60 text-base text-gray-8 max-md:max-h-32 max-md:text-sm"
                     {...field}
                   />
                 </FormControl>
@@ -111,7 +112,7 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
             name="numberOfChapters"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-base text-gray-7">
+                <FormLabel className="text-base text-gray-7 max-md:text-sm max-sm:text-xs">
                   Number of chapters
                 </FormLabel>
                 <FormControl>
@@ -130,13 +131,71 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
             )}
           />
 
-          {/* <Raw variant="vertical" gap="12px" className="mb-4">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <Raw className="justify-between">
+                  <FormLabel className="text-base text-gray-7 max-md:text-sm max-sm:text-xs">
+                    Title
+                  </FormLabel>
+                  <Raw gap="8px" className="items-center">
+                    <Switch
+                      checked={isDisable}
+                      className="max-md:h-5"
+                      onCheckedChange={() =>
+                        setIsDisable((disable) => !disable)
+                      }
+                    />
+                    <span className="text-sm text-gray-6 ">Leave it to AI</span>
+                  </Raw>
+                </Raw>
+
+                <FormControl>
+                  <Input
+                    placeholder="Title of the storybook"
+                    {...field}
+                    className="h-12 text-base text-gray-8"
+                    disabled={isDisable}
+                    value={isDisable ? "Leave AI generate title" : field.value}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </Raw>
+
+        <Button
+          type="submit"
+          className="mt-auto w-full space-x-3 px-6 py-6 text-lg max-md:space-x-2 max-md:px-3 max-md:py-3 max-md:text-sm"
+          disabled={profile?.used_credit === profile?.credit || isLoading}
+        >
+          {isLoading ? (
+            <div className=" animate-spin">
+              <CircleNotch weight="fill" />
+            </div>
+          ) : (
+            <Sparkle weight="fill" />
+          )}
+          <span> Generate </span>
+        </Button>
+      </form>
+    </Form>
+  );
+}
+
+export default GenerateForm;
+
+/* <Raw variant="vertical" gap="12px" className="mb-4">
             <FormField
               control={form.control}
               name="pointOfView"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel className="text-base text-gray-7">
+                  <FormLabel className="text-base text-gray-7 max-md:text-sm max-sm:text-xs">
                     Point of view
                   </FormLabel>
                   <FormControl>
@@ -180,7 +239,7 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
               name="tone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-base text-gray-7">Tone</FormLabel>
+                  <FormLabel className="text-base text-gray-7 max-md:text-sm max-sm:text-xs">Tone</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -193,19 +252,19 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
                     <SelectContent>
                       <SelectItem
                         value="comedy"
-                        className="text-base text-gray-7"
+                        className="text-base text-gray-7 max-md:text-sm max-sm:text-xs"
                       >
                         comedy
                       </SelectItem>
                       <SelectItem
                         value="kids"
-                        className="text-base text-gray-7"
+                        className="text-base text-gray-7 max-md:text-sm max-sm:text-xs"
                       >
                         kids
                       </SelectItem>
                       <SelectItem
                         value="romantic"
-                        className="text-base text-gray-7"
+                        className="text-base text-gray-7 max-md:text-sm max-sm:text-xs"
                       >
                         romantic
                       </SelectItem>
@@ -219,61 +278,4 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
           <Separator
             orientation="horizontal"
             className="mx-auto mb-3 w-11/12"
-          /> */}
-
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <Raw className="justify-between">
-                  <FormLabel className="text-base text-gray-7">Title</FormLabel>
-                  <Raw gap="8px" className="items-center">
-                    <Switch
-                      checked={isDisable}
-                      onCheckedChange={() =>
-                        setIsDisable((disable) => !disable)
-                      }
-                    />
-                    <span className="text-sm font-medium text-gray-6">
-                      Leave it to AI
-                    </span>
-                  </Raw>
-                </Raw>
-
-                <FormControl>
-                  <Input
-                    placeholder="Title of the storybook"
-                    {...field}
-                    className="h-12 text-base text-gray-8"
-                    disabled={isDisable}
-                    value={isDisable ? "Leave AI generate title" : field.value}
-                  />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </Raw>
-
-        <Button
-          type="submit"
-          className="mt-auto w-full space-x-3 px-6 py-6 text-lg"
-          disabled={profile?.used_credit === profile?.credit || isLoading}
-        >
-          {isLoading ? (
-            <div className=" animate-spin">
-              <CircleNotch weight="fill" />
-            </div>
-          ) : (
-            <Sparkle weight="fill" />
-          )}
-          <span> Generate </span>
-        </Button>
-      </form>
-    </Form>
-  );
-}
-
-export default GenerateForm;
+          /> */
