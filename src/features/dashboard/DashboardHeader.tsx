@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  Bell,
+  // Bell,
   CreditCard,
   GearSix,
   Lifebuoy,
@@ -65,12 +65,12 @@ function DashboardHeader() {
                 <Link to={"/app/home"}>Home</Link>
               </SheetClose>
               <SheetClose asChild>
-                <Link to={"/app/dashboard"}>Library</Link>
+                <Link to={"/app/community"}>Community</Link>
               </SheetClose>
             </SheetContent>
           </Sheet>
         </div>
-        <Link to="/app/dashboard">
+        <Link to="/app/home">
           <img
             src="/logo-black.svg"
             alt="logo"
@@ -81,6 +81,7 @@ function DashboardHeader() {
       <div className="hidden sm:block">
         <Navbar />
       </div>
+
       <div className="flex items-center gap-5 max-lg:gap-3">
         <div className="flex items-center gap-5 max-lg:gap-3">
           <Button
@@ -106,13 +107,13 @@ function DashboardHeader() {
           </div>
         </div>
         <div className="flex items-center gap-3 max-lg:gap-2">
-          <Button
+          {/* <Button
             size={"icon"}
             variant={"ghost"}
             className="hover: text-xl max-sm:text-lg"
           >
             <Bell />
-          </Button>
+          </Button> */}
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar>

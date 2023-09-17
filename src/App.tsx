@@ -10,7 +10,7 @@ const Login = lazy(() => import("@/features/registration/Login"));
 const SignUp = lazy(() => import("@/features/registration/SignUp"));
 const AppLayout = lazy(() => import("@/pages/AppLayout"));
 const Dashboard = lazy(() => import("@/features/dashboard/Dashboard"));
-const Home = lazy(() => import("@/features/dashboard/Home"));
+const Community = lazy(() => import("@/features/community"));
 const Generate = lazy(() => import("@/features/generate/Generate"));
 const LandingPage = lazy(() => import("@/pages/landingPage"));
 
@@ -32,9 +32,9 @@ function App() {
               <Route path="signup" element={<SignUp />} />
             </Route>
             <Route path="app" element={<AppLayout />}>
-              <Route index element={<Navigate replace to="dashboard" />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="home" element={<Home />} />
+              <Route index element={<Navigate replace to="home" />} />
+              <Route path="home" element={<Dashboard />} />
+              <Route path="community" element={<Community />} />
               <Route path="create" element={<Generate />} />
             </Route>
           </Routes>

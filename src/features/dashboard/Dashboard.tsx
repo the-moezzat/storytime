@@ -55,7 +55,7 @@ export default function Dashboard() {
                     Start imagination
                   </Button>
                 </Link>
-                <Link to={"/app/home"}>
+                <Link to={"/app/community"}>
                   <Button variant={"outline"} size={"sm"}>
                     Explore community
                   </Button>
