@@ -5,7 +5,10 @@ import IBook from "@/types/IBook";
 
 function Book({ book }: { book: IBook }) {
   return (
-    <Raw gap="12px" className="rounded-lg bg-white p-2 ">
+    <Raw
+      gap="12px"
+      className="rounded-2xl bg-white p-4 max-lg:rounded-xl max-md:p-3 "
+    >
       {/* <div className="max-w-[108px] overflow-hidden rounded-xl"> */}
       {/* <AspectRatio ratio={3 / 4}> */}
       {/* <img
@@ -21,7 +24,9 @@ function Book({ book }: { book: IBook }) {
       {/* </AspectRatio> */}
       {/* </div> */}
       <Raw variant="vertical" gap="4px" className="items-start">
-        <p className="font-medium leading-tight text-gray-7">{book.title}</p>
+        <p className="font-semibold leading-tight text-gray-7 max-sm:text-sm">
+          {book.title}
+        </p>
 
         {/*<Raw className="flex-wrap" gap="4px">*/}
         {/*  {book?.badges?.map((badge) => (*/}
@@ -29,7 +34,7 @@ function Book({ book }: { book: IBook }) {
         {/*  ))}*/}
         {/*</Raw>*/}
 
-        <p className="mb-2 text-sm text-gray-6">
+        <p className="mb-2 text-sm text-gray-6 max-sm:text-xs">
           {book.numberOfChapters} chapters
         </p>
 

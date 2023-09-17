@@ -24,14 +24,14 @@ export default function Dashboard() {
 
   return (
     <ScrollArea className="col-span-full">
-      <div className="flex items-center justify-between gap-4">
-        <h1 className="mb-1 scroll-m-20 text-xl font-bold text-gray-8 sm:mb-2 lg:text-2xl">
+      <div className="flex flex-col items-start justify-between gap-1 sm:flex-row sm:gap-2">
+        <h1 className="mb-1 scroll-m-20 text-lg font-bold text-gray-8 sm:mb-2 md:text-xl lg:text-2xl ">
           Welcome, <span className="font-medium">{firstName}</span>
         </h1>
         <Link to={"/app/create"}>
-          <Button className="flex items-center gap-2  py-5">
-            <Plus size={18} weight="bold" />
-            Create storybook
+          <Button className="xs:text-sm flex h-7 items-center gap-2 py-1 text-xs text-primary-9 sm:py-4 md:h-8 md:px-4 lg:h-10 lg:text-base">
+            <Plus weight="bold" />
+            Start imagination
           </Button>
         </Link>
       </div>

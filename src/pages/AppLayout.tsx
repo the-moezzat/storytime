@@ -32,6 +32,11 @@ const Main = styled.div`
     border-top-right-radius: 18px;
     height: calc(100vh - 48px);
   }
+  @media (max-width: 650px) {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: calc(100vh - 40px);
+  }
 `;
 
 function AppLayout() {
@@ -51,7 +56,7 @@ function AppLayout() {
 
   return (
     isLoading || (
-      <div className="mx-auto max-w-[1440px] px-4 max-lg:px-2">
+      <div className="mx-auto max-w-[1440px] px-4 max-lg:px-2 max-sm:px-0">
         <DashboardHeader />
         <Main>
           <Suspense

@@ -13,6 +13,7 @@ import { addStory } from "@/services/apiStories";
 import useUser from "@/hooks/useUser";
 import useProfile from "@/hooks/useProfile";
 import { Button } from "@/components/ui/button";
+import InfoScreen from "@/components/infoScreen";
 
 const endpoint = import.meta.env["VITE_API_URL"] as string;
 
@@ -83,48 +84,60 @@ function Generate() {
 
   return (
     <>
-      <ScrollArea className="col-span-7 h-full rounded-xl bg-white">
+      <ScrollArea className="col-span-7 h-full rounded-xl bg-white max-lg:col-span-8 max-md:hidden">
         <div className="p-4">
           <GenerateForm generate={generate} isLoading={isLoading} />
         </div>
       </ScrollArea>
       {/* <ScrollArea className="col-[8_/_span_17]  rounded-xl bg-white "> */}
-      <div className="col-[8_/_span_17] h-full  overflow-x-auto rounded-xl bg-white">
-        {profile?.used_credit === profile?.credit && !data && (
-          <div className="flex h-full flex-col items-center justify-center  p-4">
-            <img src="/warning.svg" alt="air-craft" className="mb-10 h-36" />
-            <h2 className="mb-6 text-center text-2xl font-bold text-gray-8">
+      <div className="col-[8_/_span_17] h-full  overflow-x-auto rounded-xl bg-white max-lg:col-[9_/_span_16] max-md:col-span-full">
+        {profile?.used_credit !== profile?.credit && !data && (
+          <InfoScreen>
+            <InfoScreen.Image
+              src="/warning.svg"
+              alt="air-craft"
+              className="mb-8 h-36"
+            />
+            <InfoScreen.Title>
               You're out of credits! buy some credit to continue your journey in
               creativity land
-            </h2>
-            <div className=" space-x-2">
+            </InfoScreen.Title>
+            <InfoScreen.actions className="space-x-2">
               <Button>Buy credit</Button>
               <Button variant={"outline"}>Discover community</Button>
-            </div>
-          </div>
+            </InfoScreen.actions>
+          </InfoScreen>
         )}
-        {isLoading && (
-          <div className="flex h-full flex-col items-center justify-center gap-6  p-4 ">
-            <Loading type="self" size="large" className="text-[#12EDE8]" />
-            <h2 className="mb-3 text-center text-xl font-bold text-[#161D25]">
-              Tighten Your Seatbelt: Your AI-Aeroplane is in Flight!
-            </h2>
-          </div>
+        {!isLoading && (
+          <InfoScreen>
+            <Loading type="self" size="large" className="mb-3 text-primary" />
+            <InfoScreen.Title>
+              Tighten Your Seatbelt: Your AI is in Flight!
+            </InfoScreen.Title>
+            <InfoScreen.Description>
+              your AI is crafting a unique story for you. this process takes
+              around 5 minutes don't close this page
+            </InfoScreen.Description>
+          </InfoScreen>
         )}
         {!data && !isLoading && profile?.used_credit !== profile?.credit && (
-          <div className="flex h-full flex-col items-center justify-center  p-4">
-            <img src="/air-craft.svg" alt="air-craft" className="mb-10 h-56" />
-            <h2 className="mb-3 text-center text-2xl font-bold text-gray-8">
+          <InfoScreen>
+            <InfoScreen.Image
+              src="/air-craft.svg"
+              alt="air-craft"
+              className="mb-2 h-56"
+            />
+            <InfoScreen.Title>
               Take Flight to Imagination: Where Will Your AI-Powered Aeroplane
               Land?
-            </h2>
-            <p className="mb-8 mt-4 text-center text-sm text-gray-6 max-lg:text-xs">
+            </InfoScreen.Title>
+            <InfoScreen.Description>
               Embark on a Journey of Creativity! Simply enter your AI-Aeroplane
               prompt below, and watch as it takes off into the Land of
               Imagination, crafting a unique story just for you. Your adventure
               awaits – let's begin!
-            </p>
-          </div>
+            </InfoScreen.Description>
+          </InfoScreen>
         )}
         {data && <StoryViewer story={data.data} />}
         {/* <EbupReader /> */}
