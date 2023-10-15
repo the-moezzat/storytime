@@ -13,10 +13,15 @@ const formSchema = z
       message: "Provide your writing style.",
     }),
   })
-  .refine((values) => Number(values.numberOfChapters) < 5, {
-    message: "Number of chapters at most 5",
-    path: ["numberOfChapters"],
-  });
+  .refine(
+    (values) =>
+      Number(values.numberOfChapters) <= 5 &&
+      Number(values.numberOfChapters) > 0,
+    {
+      message: "Number of chapters must be at most 5",
+      path: ["numberOfChapters"],
+    },
+  );
 
 function useGenerateForm(
   defaultValues: z.infer<typeof formSchema>,

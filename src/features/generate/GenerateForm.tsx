@@ -54,12 +54,13 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
       title: isDisable ? "Leave AI generate title" : "",
     },
     (values) => {
-      if (profile?.credit !== profile?.used_credit)
-        generate({
-          prompt: values.description,
-          writing_style: values.tone,
-          num_chapters: Number(values.numberOfChapters),
-        });
+      // console.log(values);
+        if (profile?.credit !== profile?.used_credit)
+          generate({
+            prompt: values.description,
+            writing_style: values.tone,
+            num_chapters: Number(values.numberOfChapters),
+          });
     },
   );
 
@@ -119,7 +120,20 @@ function GenerateForm({ generate, isLoading }: GenerateFormProp) {
                   <Input
                     placeholder="Number of chapters"
                     type="number"
-                    {...field}
+                    onChange={(e) => {
+                      if (e.target.value >= "5") e.target.value = "5";
+                      if (e.target.value < "1") e.target.value = "1";
+                      if (
+                        e.target.value > "0" &&
+                        e.target.value <= "5" &&
+                        e.target.value !== "e" &&
+                        e.target.value !== "E" &&
+                        e.target.value !== " "
+                      ) {
+                        // console.log(e.target.value);
+                        field.onChange(e.target.value);
+                      }
+                    }}
                     className="h-12 text-base text-gray-8"
                   />
                 </FormControl>
