@@ -141,7 +141,7 @@ export default function SignUp() {
                 {/* <FormLabel>Email</FormLabel> */}
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-6">
+                    <span className="absolute bottom-0 left-0 top-0 md:flex hidden items-center pl-4 text-gray-6">
                       <Envelope size={32} weight="thin" />
                     </span>
                     <Input
@@ -163,7 +163,7 @@ export default function SignUp() {
               <FormItem>
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-6">
+                    <span className="absolute hidden bottom-0 left-0 top-0 md:flex items-center pl-4 text-gray-6">
                       <Password size={32} weight="thin" />
                     </span>
                     <Input
@@ -185,7 +185,7 @@ export default function SignUp() {
               <FormItem>
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute bottom-0 left-0 top-0 flex items-center pl-4 text-gray-6">
+                    <span className="absolute hidden bottom-0 left-0 top-0 md:flex items-center pl-4 text-gray-6">
                       <Password size={32} weight="thin" />
                     </span>
                     <Input
