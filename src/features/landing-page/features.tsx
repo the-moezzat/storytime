@@ -27,7 +27,7 @@ export default function Features() {
       <div className="mb-8 px-4 py-10 sm:px-6 sm:pt-24 lg:px-8">
         <div className="text-center">
           <h2 className="text-base font-medium uppercase tracking-wider text-blue-5">
-            What is storytyme?
+            How it's work?
           </h2>
           <p className="mt-1 text-2xl font-extrabold text-gray-8 sm:text-3xl sm:tracking-tight lg:text-4xl">
             Unleash the power of imagination
