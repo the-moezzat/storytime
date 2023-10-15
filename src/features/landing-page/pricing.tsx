@@ -79,19 +79,19 @@ export default function Pricing() {
                 <FeatureIcon>
                   <CheckCircle weight="fill" />
                 </FeatureIcon>
-                <FeatureText>10 Questions</FeatureText>
+                <FeatureText>50 Credits</FeatureText>
               </li>
               <li className="flex items-center gap-2">
                 <FeatureIcon>
                   <CheckCircle weight="fill" />
                 </FeatureIcon>
-                <FeatureText>5 PDFs</FeatureText>
+                <FeatureText>1 Story</FeatureText>
               </li>
               <li className="flex items-center gap-2">
                 <FeatureIcon>
                   <CheckCircle weight="fill" />
                 </FeatureIcon>
-                <FeatureText>100 pages</FeatureText>
+                <FeatureText>Community stories</FeatureText>
               </li>
             </ul>
           </FeaturesBox>
@@ -106,7 +106,7 @@ export default function Pricing() {
               Premium
             </p>
             <p className="self-center justify-self-start text-5xl font-bold text-white max-sm:text-4xl">
-              $12<span className="text-lg text-gray-6">/mo</span>
+              $10<span className="text-lg text-gray-6">/mo</span>
             </p>
           </div>
           <Separator orientation="vertical" className="bg-gray-7" />
@@ -116,19 +116,19 @@ export default function Pricing() {
                 <FeatureIcon>
                   <CheckCircle weight="fill" />
                 </FeatureIcon>
-                <FeatureText>10,000 Questions</FeatureText>
+                <FeatureText>1,000 Credits</FeatureText>
               </li>
               <li className="flex items-center  gap-2">
                 <FeatureIcon>
                   <CheckCircle weight="fill" />
                 </FeatureIcon>
-                <FeatureText>Unlimited PDFs</FeatureText>
+                <FeatureText>20 stories</FeatureText>
               </li>
               <li className="flex items-center gap-2">
                 <FeatureIcon>
                   <CheckCircle weight="fill" />
                 </FeatureIcon>
-                <FeatureText>50,000 pages</FeatureText>
+                <FeatureText>Community stories</FeatureText>
               </li>
             </ul>
           </FeaturesBox>

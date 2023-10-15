@@ -4,7 +4,7 @@ import Navbar from "./navbar";
 
 export default function Hero() {
   return (
-    <div className="mx-auto max-w-[1480px] overflow-hidden  bg-[#171625] px-4 ">
+    <div className="overflow-hidden  bg-[#171625] px-4 ">
       <Navbar />
       <header className=" relative z-10 w-full py-24 max-md:py-24">
         <div className="z-10 mx-auto w-10/12 text-center max-lg:w-11/12">
@@ -36,7 +36,7 @@ export default function Hero() {
           <Link to={"registration/signup"}>
             <Button
               size={"lg"}
-              className=" h-12 w-44 rounded-lg bg-gradient-to-b from-primary-6 to-primary-4 p-4 shadow-lg transition-all hover:bg-gradient-to-br max-md:h-9 max-md:w-32"
+              className="h-12 w-44 rounded-lg bg-gradient-to-b from-primary-6 to-primary-4 p-4 shadow-lg shadow-primary/25 transition-all hover:bg-gradient-to-br max-md:h-9 max-md:w-32"
             >
               Get started
             </Button>

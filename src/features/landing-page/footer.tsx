@@ -58,9 +58,10 @@ function Footer() {
 
       <div className="col-start-[15] col-end-[24] flex flex-col justify-end gap-6 max-lg:col-end-[25] max-md:gap-7 max-[500px]:col-span-full max-[500px]:justify-start">
         <p className="mt-4 text-base text-gray-7 max-md:text-sm max-sm:mb-3">
-          Step into the future with PDFChat - your personal PDF
-          conversationalist! Simplify, streamline, and revolutionize the way you
-          interact with your PDF
+          Welcome to our world of AI-powered storybooks for kids! Let AI and
+          imagination blend seamlessly as we craft unique adventures tailored to
+          your child's interests. Explore captivating stories that make reading
+          an exciting and immersive experience.
         </p>
         <div className="flex flex-wrap items-center gap-4 max-md:gap-2">
           <Button>Check out our other products!</Button>

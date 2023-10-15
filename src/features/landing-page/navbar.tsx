@@ -10,17 +10,17 @@ export default function Navbar() {
       </Link>
       <ul className="hidden gap-8 text-sm text-[#B2B1B6] sm:flex lg:text-base ">
         <li>
-          <a href="#" className="">
-            Features
+          <a href="#features" className="">
+            How it works
           </a>
         </li>
         <li>
-          <a href="#" className="">
+          <a href="#pricing" className="">
             Pricing
           </a>
         </li>
         <li>
-          <a href="#" className="">
+          <a href="#faq" className="">
             FAQ
           </a>
         </li>
